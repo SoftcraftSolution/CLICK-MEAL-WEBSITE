@@ -1,0 +1,58 @@
+/* src/components/Header.css */
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .header-logo {
+    height: 40px; /* Adjust as needed */
+    width: auto;
+  }
+  
+  .header-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .header-date-picker, .header-company-selector {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 12px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif; /* Make sure to import Poppins font */
+    color: #333;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  .header-date-picker:hover, .header-company-selector:hover {
+    background-color: #f0f0f0;
+    border-color: #bbb;
+  }
+  
+  .header-icon {
+    color: #888; /* Icon color */
+  }
+  
+  .header-cart-icon {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .header-cart-icon i {
+    cursor: pointer;
+  }
+  

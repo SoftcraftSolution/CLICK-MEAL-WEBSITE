@@ -1,25 +1,37 @@
-import logo from './logo.svg';
+// src/App.js
+import React, { useState } from 'react';
+import Header from './Component/Home/Header/Header';
+import Banner from './Component/Home/Banner/Banner';
+import Categories from './Component/Home/Categories/Categories';
+import Menu from './Component/Home/Menu/Menu';
+import ProductPage from './Component/ProductDetails/Product';
 import './App.css';
 
-function App() {
+const App = () => {
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const handleProductClick = (product) => {
+    setSelectedProduct(product); // Set the clicked product
+  };
+
+  const handleBackToMenu = () => {
+    setSelectedProduct(null); // Clear selected product to return to main menu
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      {selectedProduct ? (
+        <ProductPage product={selectedProduct} onBack={handleBackToMenu} />
+      ) : (
+        <>
+          <Banner />
+          <Categories />
+          <Menu onProductClick={handleProductClick} />
+        </>
+      )}
     </div>
   );
-}
+};
 
 export default App;
