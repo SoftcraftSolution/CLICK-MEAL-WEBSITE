@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom'; // Import useLocation to access 
 import ProductGallery from './ProductGallery/Productgallery';
 import ProductDetails from './Details/Details';
 import ProductExtras from './ProductExtras/ProductExtras';
-import QuantitySelector from './QuantitySelector/QuantitySelector';
+import QuantitySelector from './QuantitySelector/quantityselector';
 import './Product.css';
 
 const ProductPage = () => {
