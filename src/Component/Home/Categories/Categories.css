@@ -32,15 +32,15 @@
 
 .categories-container {
   display: flex;
-  justify-content: center;
+  padding-left: 100px;
   gap: 20px;
   padding-top: 5px;
 }
 
 .category-card {
   position: relative;
-  width: 140px; /* Set a consistent width for all cards */
-  height: 120px; /* Set a consistent height for all cards */
+  width: 180px; /* Set a consistent width for all cards */
+  height: 160px; /* Set a consistent height for all cards */
   border-radius: 8px;
   overflow: hidden;
   cursor: pointer;
