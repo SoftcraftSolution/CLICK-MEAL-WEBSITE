@@ -1,40 +1,51 @@
-// src/components/Categories.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import './Categories.css';
 
-// Import images
-import saladImage from '../../../assets/saladdcategory.png';
-import hotImage from '../../../assets/hottcategory.png';
-import nonVegImage from '../../../assets/nonvegcategory.png';
-import vegImage from '../../../assets/hottcategory.png';
-import fishImage from '../../../assets/fishcategory.png';
-
-// Category data with imported images and names
-const categories = [
-  { name: 'Salad', image: saladImage },
-  { name: 'Hot', image: hotImage },
-  { name: 'Non Veg', image: nonVegImage },
-  { name: 'Veg', image: vegImage },
-  { name: 'Fish', image: fishImage },
-];
-
 const Categories = () => {
+  const [categories, setCategories] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    // Fetch subcategories from the API
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get('https://clickmeal-backend.vercel.app/user/subcategory-list');
+        if (response.data && response.data.data) {
+          setCategories(response.data.data);
+        }
+      } catch (error) {
+        setError('Failed to fetch categories. Please try again later.');
+        console.error('Error fetching subcategories:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
   return (
     <div className="categories-section">
       <div className="categories-header">
         <h2 className="categories-title">Categories</h2>
         <a href="#" className="view-all-link">View All</a>
       </div>
-      <div className="categories-container">
-        {categories.map((category, index) => (
-          <div key={index} className="category-card">
-            <img src={category.image}  className="category-image" />
-      
-         
+      {isLoading ? (
+        <p>Loading categories...</p>
+      ) : error ? (
+        <p className="error-message">{error}</p>
+      ) : (
+        <div className="categories-container">
+          {categories.slice(0, 5).map((category) => ( // Limit to 5 categories
+            <div key={category._id} className="category-card">
+              <img src={category.image} alt={category.name} className="category-image" />
+              <p className="category-name">{category.name}</p>
             </div>
-          
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

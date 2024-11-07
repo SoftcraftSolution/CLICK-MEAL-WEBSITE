@@ -1,0 +1,8 @@
+.final-order-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f4f6fa;
+    justify-content:center ;
+}
+  

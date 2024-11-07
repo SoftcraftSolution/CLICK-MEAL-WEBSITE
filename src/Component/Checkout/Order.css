@@ -1,0 +1,67 @@
+.order-info {
+    width: 30%;
+    padding: 20px;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .order-info h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+  
+  .order-item {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 10px;
+  }
+  
+  .order-item img {
+    width: 90px;
+    height: 100px;
+    border-radius: 8px;
+    margin-right: 10px;
+  }
+  
+  .order-details {
+    flex-grow: 1;
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+  }
+  
+  .quantity-control {
+    display: flex;
+    align-items: center;
+  }
+  
+  .order-quantity-control button {
+    width: 24px;
+    height: 24px;
+    background-color: #61AE5A;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  #plusbutton{
+    background-color: #61AE5A;
+  }
+
+  #minusbutton{
+    color: #61AE5A;
+  }
+
+  .minus-button{
+    width: 24px;
+    height: 24px;
+    background-color: #FFFFFF;
+    color: #61AE5A;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 1px solid;
+  }

@@ -1,25 +1,36 @@
-// src/components/Home/MenuItem/MenuItem.js
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 import './MenuItem.css';
 
-const MenuItem = ({ item, onProductClick }) => {
+const MenuItem = ({ item }) => {
+  const navigate = useNavigate(); // Initialize navigate
+
   if (!item) return null;
 
   const handleClick = () => {
-    onProductClick(item); // Call onProductClick with item details
+    // Navigate to ProductDetails page with item data
+    navigate('/product', { state: { product: item } });
   };
 
   return (
     <div className="menu-item-container" onClick={handleClick}>
-      <h3 className="menu-item-name">{item.name || 'Unknown Item'}</h3>
-      <p className="menu-item-description">{item.description || 'A delicious item from our menu.'}</p>
-      <div className="menu-item-price">₹{item.price || 'N/A'}</div>
-      <button
-        className="menu-item-add-to-cart"
-        onClick={(e) => e.stopPropagation()} // Prevents onProductClick when Add to Cart is clicked
-      >
-        Add to Cart
-      </button>
+      {item.image && <img src={item.image} alt={item.itemName} className="menu-item-image" />}
+      <h3 className="menu-item-name">{item.itemName || 'Unknown Item'}</h3>
+      <div style={{ textAlign: "left", paddingBottom: "5px" }} className="menu-item-description">
+        {item.description || 'A delicious item from our menu.'}
+      </div>
+      <div className="flexbutton-card">
+        <div className="menu-item-price">₹{item.price || 'N/A'}</div>
+        <button
+          className="menu-item-add-to-cart"
+          onClick={(e) => {
+            e.stopPropagation(); // Prevent parent click handler
+            alert('Add to Cart functionality');
+          }}
+        >
+          Add to Cart
+        </button>
+      </div>
     </div>
   );
 };

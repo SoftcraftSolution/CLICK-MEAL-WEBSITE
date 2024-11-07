@@ -1,0 +1,126 @@
+/* Main Container */
+.delivery-payment {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  /* Header */
+  .delivery-payment h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Add Extras Section */
+  .extras {
+    margin-bottom: 20px;
+  }
+  
+  .extra-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+  }
+  
+  /* Image styling */
+  .extra-item img {
+    width: 70px;
+    height: 70px;
+    border-radius: 8px;
+    margin-right: 15px;
+  }
+  
+  /* Extra Info */
+  .extra-info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .extra-info h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    color: #333;
+  }
+  
+  .extra-info p {
+    font-size: 14px;
+    color: #777;
+    margin: 0;
+  }
+  
+  .extra-info button {
+    padding: 6px 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+  }
+  
+  .extra-info button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Price styling */
+  .extra-price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-left: 15px;
+  }
+  
+  /* Delivery Time Styling */
+  .delivery-time {
+    padding: 10px;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    margin-top: 15px;
+    font-family: 'Poppins', sans-serif;
+    color: #61AE5A;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .delivery-time p {
+    color: #4CAF50;
+    font-size: 15px;
+    font-weight: 500;
+    margin: 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Additional Items Section */
+  .additional-items {
+    margin-top: 20px;
+  }
+  
+  .additional-items p {
+    font-size: 15px;
+    color: #555;
+  }
+  
+  .additional-items span {
+    color: #4CAF50;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 15px;
+    margin-left: 5px;
+  }
+  
+  

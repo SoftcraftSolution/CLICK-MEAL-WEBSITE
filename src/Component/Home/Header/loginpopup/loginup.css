@@ -1,0 +1,123 @@
+/* src/components/loginpopup.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap'); /* Import Nunito font */
+
+.login-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.login-popup-content {
+  display: flex;
+  background: white;
+ 
+  overflow: hidden;
+  width: 600px;
+  height: 450px; /* Increase height for a more spacious look */
+  font-family: 'Nunito', sans-serif; /* Apply Nunito font */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+}
+
+.login-popup-image img {
+  width: 100%;
+  height: 100%;
+
+}
+
+.login-popup-image {
+  width: 50%;
+}
+
+.login-popup-form {
+  width: 50%;
+  padding: 30px; /* Increase padding for spacing */
+  position: relative;
+  text-align: center;
+
+}
+
+.login-popup-form h2 {
+  margin: 0 0 10px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #333; /* Darker color for title */
+}
+
+.login-popup-form p {
+  font-size: 14px;
+  color: #666; /* Subtle color for description text */
+  margin-bottom: 20px;
+}
+
+.login-popup-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-popup-form input {
+  margin: 10px 0;
+  padding: 12px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  color: #333;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s;
+}
+
+.login-popup-form input:focus {
+  border-color: #61AE5A;
+  outline: none;
+}
+
+.login-popup-form button {
+  margin-top: 15px;
+  padding: 12px;
+  font-size: 16px;
+  
+  color: #000000;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+
+.login-popup-form button:hover {
+
+}
+
+.login-popup-form a {
+  color: #61AE5A;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.login-popup-form a:hover {
+  text-decoration: underline;
+}
+
+.login-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #888;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.login-close-button:hover {
+  color: #555;
+}

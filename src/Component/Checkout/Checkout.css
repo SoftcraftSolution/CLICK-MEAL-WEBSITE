@@ -1,0 +1,20 @@
+.checkout-container {
+  font-family: 'Arial', sans-serif;
+
+background-color: #f4f6fa;
+  padding: 20px;
+  height: 100%;
+}
+
+.checkout-header h1 {
+  font-size: 24px;
+  color: #4CAF50;
+  text-align: center;
+}
+
+.checkout-main-content {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  height: 100vh;
+}
