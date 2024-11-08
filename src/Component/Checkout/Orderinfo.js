@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Cookies from "js-cookie"; // Import js-cookie
 import "./Order.css";
 import PaymentSummary from "./Payment";
 
@@ -8,10 +9,17 @@ function OrderInfo() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const userId = "672a0c433a88cf636d22d6ba"; // Replace with actual userId if needed
+  // Fetch userId from cookies
+  const userId = Cookies.get('userId');
 
   useEffect(() => {
     const fetchCartItems = async () => {
+      if (!userId) {
+        setError("User ID not found. Please log in.");
+        setLoading(false);
+        return;
+      }
+
       try {
         const response = await axios.get(`https://clickmeal-backend.vercel.app/user/my-cart?userId=${userId}`);
         if (response.data && response.data.cartItems) {
@@ -28,7 +36,7 @@ function OrderInfo() {
     };
 
     fetchCartItems();
-  }, []);
+  }, [userId]);
 
   const updateQuantity = (id, amount) => {
     setCartItems((prevItems) =>

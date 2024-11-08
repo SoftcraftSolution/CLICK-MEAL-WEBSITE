@@ -4,92 +4,109 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
 
 .register-popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    font-family: 'Poppins', sans-serif;
-  }
-  
-  .register-popup-content {
-    display: flex;
-    background: white;
-    border-radius: 8px;
-    overflow: hidden;
-    width: 600px;
-    font-family: 'Poppins', sans-serif;
-  }
-  
-  .register-popup-image img {
-    width: 100%;
-    height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  font-family: 'Poppins', sans-serif;
+}
 
-  }
-  
-  .register-popup-image {
-    width: 50%;
-  }
-  
-  .register-popup-form {
-    width: 50%;
-    padding: 20px;
-    position: relative;
-    text-align: center;
-    font-family: 'Poppins', sans-serif;
-  }
-  
-  .register-popup-form h2 {
-    margin: 0 0 10px;
-  }
-  
-  .register-popup-form form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .register-popup-form input {
-    margin: 10px 0;
-    padding: 12px;
-    border-radius: 4px;
-    border: 1px solid #8B9094;
-    font-family: 'Nunito', sans-serif;
-  }
-  
-  .register-popup-form button {
-    margin-top: 10px;
-    padding: 10px;
-    color: black;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-family: 'Poppins', sans-serif;
-  }
-  
-  .register-popup-form a {
-    color: #4CAF50;
-    text-decoration: none;
-  }
-  
-  .register-close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
-  }
+.register-popup-content {
+  display: flex;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 600px;
+  font-family: 'Poppins', sans-serif;
+}
 
-  .register-popup-title{
-    padding-bottom: 5px;
-    padding-top: 5px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-  }
-  
+.register-popup-image img {
+  width: 100%;
+  height: 100%;
+}
+
+.register-popup-image {
+  width: 50%;
+}
+
+.register-popup-form {
+  width: 50%;
+  padding: 20px;
+  position: relative;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+.register-popup-form h2 {
+  margin: 0 0 10px;
+}
+
+.register-popup-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.register-popup-form input,
+.register-popup-form select { /* Applying same styles to select as inputs */
+  margin: 10px 0;
+  padding: 12px;
+  border-radius: 4px;
+  border: 1px solid #8B9094;
+  font-family: 'Nunito', sans-serif;
+}
+
+.register-popup-form button {
+  margin-top: 10px;
+  padding: 10px;
+  color: black;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+}
+
+.register-popup-form a {
+  color: #4CAF50;
+  text-decoration: none;
+}
+
+.register-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.register-popup-title {
+  padding-bottom: 5px;
+  padding-top: 5px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+}
+
+.locked-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.locked-input-wrapper input {
+  flex: 1;
+  padding-right: 30px; /* Space for the lock icon */
+}
+
+.lock-icon {
+  position: absolute;
+  right: 10px;
+  color: #ccc; /* You can adjust the color */
+  pointer-events: none; /* Makes the icon non-interactive */
+}

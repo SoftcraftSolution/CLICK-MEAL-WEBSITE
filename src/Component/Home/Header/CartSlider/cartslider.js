@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Cookies from 'js-cookie'; // Import js-cookie
 import './cartslider.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
@@ -10,13 +11,17 @@ const CartSlider = ({ isOpen, onClose }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const userId = '672a0c433a88cf636d22d6ba';
-  const navigate = useNavigate(); // Use navigate hook
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCartItems = async () => {
       try {
         setLoading(true);
+        // Retrieve userId from cookies
+        const userId = Cookies.get('userId');
+        if (!userId) {
+          throw new Error('User ID not found in cookies');
+        }
         const response = await axios.get(`https://clickmeal-backend.vercel.app/user/my-cart?userId=${userId}`);
         if (response.data && response.data.cartItems) {
           setItems(response.data.cartItems);
@@ -49,7 +54,7 @@ const CartSlider = ({ isOpen, onClose }) => {
   };
 
   const handleCheckout = () => {
-    navigate('/pract'); // Navigate to /pract on checkout
+    navigate('/pract');
   };
 
   if (!isOpen) return null;
@@ -58,8 +63,8 @@ const CartSlider = ({ isOpen, onClose }) => {
     <div className="cart-slider-overlay" onClick={onClose}>
       <div className="cart-slider" onClick={(e) => e.stopPropagation()}>
         <div className="cart-header">
-          <h2> My Cart</h2>
-          <button className="close-button" onClick={onClose}>
+          <h2>My Cart</h2>
+          <button className="close-button-cart" onClick={onClose}>
             <FontAwesomeIcon icon={faTimes} />
           </button>
         </div>

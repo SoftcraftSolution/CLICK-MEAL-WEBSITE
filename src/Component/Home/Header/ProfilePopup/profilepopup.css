@@ -57,10 +57,12 @@
 }
 
 .profile-options {
-  border-top: 1px solid #ccc;
+  font-family: 'Poppins', sans-serif;
+}
+.profile-after-id{
   margin-top: 20px;
   padding-top: 15px;
-  font-family: 'Poppins', sans-serif;
+  border-top: 1px solid #ccc;
 }
 
 .profile-options p {
