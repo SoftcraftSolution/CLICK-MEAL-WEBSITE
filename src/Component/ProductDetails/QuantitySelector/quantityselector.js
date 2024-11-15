@@ -7,7 +7,7 @@ const QuantitySelector = () => {
 
   return (
     <div className="quantity-selector">
-      <h3>Select Quantity</h3>
+      <div>Select Quantity</div>
       <div className="quantity-controls">
         <button onClick={() => setQuantity(quantity > 1 ? quantity - 1 : 1)}>-</button>
         <span>{quantity}</span>

@@ -1,15 +1,18 @@
-// PaymentSummary.js
 import React from "react";
 import "./payment.css";
 
-function PaymentSummary() {
+function PaymentSummary({ orderTotal }) {
+  const deliveryCharges = 40;
+  const gstAndServiceTax = 8;
+  const totalPayment = orderTotal + deliveryCharges + gstAndServiceTax;
+
   return (
     <div className="payment-summary">
       <h2>Payment Summary</h2>
-      <p>Order Total: ₹400</p>
-      <p>Delivery Charges: ₹40</p>
-      <p>GST and Service Tax: ₹8</p>
-      <h3>Total Payment: ₹448</h3>
+      <p>Order Total: ₹{orderTotal}</p>
+      <p>Delivery Charges: ₹{deliveryCharges}</p>
+      <p>GST and Service Tax: ₹{gstAndServiceTax}</p>
+      <h3>Total Payment: ₹{totalPayment}</h3>
       <button>Order Now</button>
     </div>
   );

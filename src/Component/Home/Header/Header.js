@@ -6,6 +6,7 @@ import ProfilePopup from './ProfilePopup/profilepopup'; // Import your ProfilePo
 import CartSlider from './CartSlider/cartslider';
 import logo from '../../../assets/parislogo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import './responsive.css';
 import { faCalendarAlt, faBuilding, faUser, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 const Header = () => {
@@ -44,7 +45,7 @@ const Header = () => {
 
   return (
     <header className="header-container">
-      <img src={logo} alt="Click Meal Logo" className="header-logo" />
+      <a href='/'><img src={logo} alt="Click Meal Logo" className="header-logo" /></a>
       <div className="header-controls">
         <button className="header-date-picker">
           <FontAwesomeIcon icon={faCalendarAlt} className="header-icon" />

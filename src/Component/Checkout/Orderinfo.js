@@ -46,6 +46,10 @@ function OrderInfo() {
     );
   };
 
+  const calculateTotalPrice = () => {
+    return cartItems.reduce((total, item) => total + item.itemId.price * item.quantity, 0);
+  };
+
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -77,8 +81,8 @@ function OrderInfo() {
         <p>No items in the cart.</p>
       )}
 
-      {/* Payment Summary */}
-      <PaymentSummary />
+      {/* Payment Summary with total price passed as a prop */}
+      <PaymentSummary orderTotal={calculateTotalPrice()} />
     </div>
   );
 }
