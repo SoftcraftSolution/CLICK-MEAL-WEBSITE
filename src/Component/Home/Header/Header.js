@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Header.css';
 import RegisterPopup from './registerpopup/registerpopup';
 import LoginPopup from './loginpopup/loginup';
-import ProfilePopup from './ProfilePopup/profilepopup'; // Import your ProfilePopup component
+import ProfilePopup from './ProfilePopup/profilepopup';
 import CartSlider from './CartSlider/cartslider';
 import logo from '../../../assets/parislogo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,7 +13,24 @@ const Header = () => {
   const [isRegisterPopupOpen, setIsRegisterPopupOpen] = useState(false);
   const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
   const [isCartSliderOpen, setIsCartSliderOpen] = useState(false);
-  const [isProfilePopupOpen, setIsProfilePopupOpen] = useState(false); // New state for Profile popup
+  const [isProfilePopupOpen, setIsProfilePopupOpen] = useState(false);
+  const [companyName, setCompanyName] = useState('Default Company'); // Initial state
+
+  useEffect(() => {
+    // Extract 'name' parameter from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const nameParam = urlParams.get('name');
+
+    // Convert to Pascal case if the 'name' parameter exists
+    if (nameParam) {
+      const formattedName = nameParam
+        .toLowerCase()
+        .split(' ')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+      setCompanyName(formattedName);
+    }
+  }, []);
 
   const openRegisterPopup = () => {
     setIsRegisterPopupOpen(true);
@@ -53,10 +70,10 @@ const Header = () => {
         </button>
         <button className="header-company-selector">
           <FontAwesomeIcon icon={faBuilding} className="header-icon" />
-          <span>Tata Consultation</span>
+          <span>{companyName}</span>
         </button>
         <div className="header-cart-icon">
-          <FontAwesomeIcon icon={faUser} onClick={openProfilePopup} /> {/* Opens Profile Popup */}
+          <FontAwesomeIcon icon={faUser} onClick={openProfilePopup} />
           <FontAwesomeIcon icon={faShoppingCart} onClick={toggleCartSlider} />
         </div>
       </div>
