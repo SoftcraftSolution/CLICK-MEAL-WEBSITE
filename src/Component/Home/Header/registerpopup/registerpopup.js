@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import './registerpopup.css';
 import sampleImage from '../../../../assets/registerimagetopost.PNG';
-import { FaLock } from 'react-icons/fa';
 import LoginPopup from '../loginpopup/loginup'; // Import the LoginPopup component
 
 const RegisterPopup = ({ isOpen, onClose, onSwitchToLogin }) => {
-  const [companyId, setCompanyId] = useState('');
-  const [companyName, setCompanyName] = useState('');
+  const [companies, setCompanies] = useState([]);
+  const [selectedCompanyId, setSelectedCompanyId] = useState('');
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -15,18 +15,21 @@ const RegisterPopup = ({ isOpen, onClose, onSwitchToLogin }) => {
     phoneNumber: ''
   });
   const [showLogin, setShowLogin] = useState(false); // State to control LoginPopup visibility
+  const navigate = useNavigate(); // Initialize navigate
 
   useEffect(() => {
-    // Extract the 'companyId' and 'name' parameters from the URL
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get('companyId');
-    const name = params.get('name');
-    if (id) {
-      setCompanyId(id);
-    }
-    if (name) {
-      setCompanyName(name);
-    }
+    const fetchCompanies = async () => {
+      try {
+        const response = await axios.get('https://clickmeal-backend.vercel.app/user/get-company');
+        const companyList = Array.isArray(response.data.data) ? response.data.data : [];
+        setCompanies(companyList);
+      } catch (error) {
+        console.error('Error fetching companies:', error);
+        setCompanies([]); // Set an empty array on error to avoid mapping errors
+      }
+    };
+
+    fetchCompanies();
   }, []);
 
   if (!isOpen) return null;
@@ -34,6 +37,10 @@ const RegisterPopup = ({ isOpen, onClose, onSwitchToLogin }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+  };
+
+  const handleCompanyChange = (e) => {
+    setSelectedCompanyId(e.target.value);
   };
 
   const handleSubmit = async (e) => {
@@ -44,12 +51,13 @@ const RegisterPopup = ({ isOpen, onClose, onSwitchToLogin }) => {
         email: formData.email,
         password: formData.password,
         phoneNumber: formData.phoneNumber,
-        companyId: companyId // Include companyId from the URL
+        companyId: selectedCompanyId // Use selected companyId
       });
       console.log('User registered successfully:', response.data);
-      
+
       setShowLogin(true); // Trigger the LoginPopup display
       onClose(); // Close the RegisterPopup
+      navigate('/loginpopup'); // Redirect to the login page
     } catch (error) {
       console.error('Error registering user:', error.response?.data || error.message);
       alert('Error registering user. Please try again.');
@@ -103,11 +111,15 @@ const RegisterPopup = ({ isOpen, onClose, onSwitchToLogin }) => {
                   required
                 />
 
-                {/* Non-editable Text input for Company with lock icon */}
-                <div className="locked-input-wrapper">
-                  <input type="text" value={companyName} placeholder="Company" readOnly required />
-                  <FaLock className="lock-icon" />
-                </div>
+                {/* Dropdown for Company Selection */}
+                <select value={selectedCompanyId} onChange={handleCompanyChange} required>
+                  <option value="" disabled>Select Company</option>
+                  {companies.map((company) => (
+                    <option key={company._id} value={company._id}>
+                      {company.name}
+                    </option>
+                  ))}
+                </select>
 
                 <button style={{ backgroundColor: "#61AE5A", color: "#FFFFFF", fontWeight: "200" }} type="submit">
                   Continue

@@ -6,6 +6,7 @@ import Categories from './Component/Home/Categories/Categories';
 import Menu from './Component/Home/Menu/Menu';
 import ProductPage from './Component/ProductDetails/Product';
 import Practise from './Component/Checkout/Checkout';
+import LoginPopup from './Component/Home/Header/loginpopup/loginup';
 import './App.css';
 import Cookies from "js-cookie";
 import FinalOrder from './Component/FinalOrderInfo/Finalorder';
@@ -68,6 +69,7 @@ const App = () => {
           <Route path="/final" element={<FinalOrder />} />
           <Route path="/product" element={<ProductPage />} />
           <Route path="/myorder" element={<FinalOrder />} />
+          <Route path="/loginpopup" element={<LoginPopup />} />
         </Routes>
       </div>
     </Router>

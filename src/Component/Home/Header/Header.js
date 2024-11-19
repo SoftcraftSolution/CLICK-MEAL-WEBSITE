@@ -14,7 +14,8 @@ const Header = () => {
   const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
   const [isCartSliderOpen, setIsCartSliderOpen] = useState(false);
   const [isProfilePopupOpen, setIsProfilePopupOpen] = useState(false);
-  const [companyName, setCompanyName] = useState('Default Company'); // Initial state
+  const [companyName, setCompanyName] = useState('Default Company');
+  const [currentDate, setCurrentDate] = useState(''); // State for current date
 
   useEffect(() => {
     // Extract 'name' parameter from URL
@@ -30,6 +31,12 @@ const Header = () => {
         .join(' ');
       setCompanyName(formattedName);
     }
+
+    // Set current date and day
+    const date = new Date();
+    const options = { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric' };
+    const formattedDate = date.toLocaleDateString('en-US', options);
+    setCurrentDate(formattedDate);
   }, []);
 
   const openRegisterPopup = () => {
@@ -66,7 +73,7 @@ const Header = () => {
       <div className="header-controls">
         <button className="header-date-picker">
           <FontAwesomeIcon icon={faCalendarAlt} className="header-icon" />
-          <span>Tuesday, 21 Nov</span>
+          <span>{currentDate}</span>
         </button>
         <button className="header-company-selector">
           <FontAwesomeIcon icon={faBuilding} className="header-icon" />
