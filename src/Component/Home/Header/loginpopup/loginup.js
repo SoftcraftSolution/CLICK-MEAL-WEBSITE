@@ -24,7 +24,6 @@ const LoginPopup = ({ isOpen, onClose, onSwitchToRegister }) => {
         Cookies.set('userId', response.data.user.id, { expires: 7 }); // Set cookie with 7-day expiration
       }
 
-      // Perform any additional actions on successful login, such as redirection
       onClose(); // Close the popup on successful login
     } catch (error) {
       console.error('Error during login:', error.response?.data || error.message);

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import './registerpopup.css';
 import sampleImage from '../../../../assets/registerimagetopost.PNG';
 import LoginPopup from '../loginpopup/loginup'; // Import the LoginPopup component
@@ -15,7 +14,6 @@ const RegisterPopup = ({ isOpen, onClose, onSwitchToLogin }) => {
     phoneNumber: ''
   });
   const [showLogin, setShowLogin] = useState(false); // State to control LoginPopup visibility
-  const navigate = useNavigate(); // Initialize navigate
 
   useEffect(() => {
     const fetchCompanies = async () => {
@@ -51,13 +49,12 @@ const RegisterPopup = ({ isOpen, onClose, onSwitchToLogin }) => {
         email: formData.email,
         password: formData.password,
         phoneNumber: formData.phoneNumber,
-        companyId: selectedCompanyId // Use selected companyId
+        companyId: selectedCompanyId
       });
       console.log('User registered successfully:', response.data);
 
       setShowLogin(true); // Trigger the LoginPopup display
       onClose(); // Close the RegisterPopup
-      navigate('/loginpopup'); // Redirect to the login page
     } catch (error) {
       console.error('Error registering user:', error.response?.data || error.message);
       alert('Error registering user. Please try again.');
@@ -110,8 +107,6 @@ const RegisterPopup = ({ isOpen, onClose, onSwitchToLogin }) => {
                   onChange={handleChange}
                   required
                 />
-
-                {/* Dropdown for Company Selection */}
                 <select value={selectedCompanyId} onChange={handleCompanyChange} required>
                   <option value="" disabled>Select Company</option>
                   {companies.map((company) => (
@@ -120,7 +115,6 @@ const RegisterPopup = ({ isOpen, onClose, onSwitchToLogin }) => {
                     </option>
                   ))}
                 </select>
-
                 <button style={{ backgroundColor: "#61AE5A", color: "#FFFFFF", fontWeight: "200" }} type="submit">
                   Continue
                 </button>
