@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
-import Cookies from 'js-cookie'; // Import js-cookie
+import Cookies from 'js-cookie'; // Import js-cookie for retrieving userId
 import ProductGallery from './ProductGallery/Productgallery';
 import ProductDetails from './Details/Details';
 import ProductExtras from './ProductExtras/ProductExtras';
@@ -29,10 +29,15 @@ const ProductPage = () => {
     }
 
     try {
+      // Updated request structure to include an items array
       const response = await axios.post('https://clickmeal-backend.vercel.app/user/add-cart', {
-        userId: userId, // Use userId retrieved from cookies
-        itemId: product.id, // Replace with the actual product ID field if different
-        quantity: quantity
+        userId: userId,
+        items: [
+          {
+            itemId: product.id, // Replace with the actual product ID field if different
+            quantity: quantity
+          }
+        ]
       });
 
       if (response.data?.message) {
@@ -56,7 +61,7 @@ const ProductPage = () => {
       </div>
       <div className="product-page-sidebar">
         <ProductExtras product1={product} />
-        <QuantitySelector setQuantity={setQuantity} />
+        <QuantitySelector quantity={quantity} setQuantity={setQuantity} />
         <button className="add-to-cart-button" onClick={handleAddToCart}>
           Add to Cart
         </button>
