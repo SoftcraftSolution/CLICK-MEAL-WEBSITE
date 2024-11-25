@@ -41,3 +41,42 @@
   justify-content: space-between;
 
 }
+
+/* Default styles for the toast */
+.toast-container {
+  width: 100%; /* Full width by default */
+  max-width: 100%; /* Ensure it uses the full screen width */
+}
+
+.Toastify__toast {
+  width: 100% !important; /* Force toast to take full width */
+  text-align: center; /* Center the text */
+  font-family: 'Poppins', sans-serif;
+  border-radius: 4px;
+  padding: 16px;
+  font-size: 14px;
+}
+
+/* Styling for success and error messages */
+.Toastify__toast--success {
+  background-color: #61AE5A; /* Green */
+  color: white;
+}
+
+.Toastify__toast--error {
+  background-color: #f44336; /* Red */
+  color: white;
+}
+
+/* Responsive styling for mobile screens */
+@media (max-width: 768px) {
+  .toast-container {
+    width: 100% !important; /* Ensure full width on smaller screens */
+  }
+
+  .Toastify__toast {
+    width: 100% !important; /* Full width on mobile */
+    font-size: 14px; /* Adjust font size for better readability */
+    padding: 12px; /* Adjust padding for mobile */
+  }
+}

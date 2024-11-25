@@ -1,74 +1,173 @@
+/* General Styling */
 .my-orders {
-    width: 35%;
-    background: #FFFFFF;
-    border-radius: 8px;
-    padding: 20px;
-    margin-right: 20px;
-    height: 100vh;
-    font-family: 'Poppins', sans-serif;
+  width: 35%; /* Initial width for larger screens */
+  background: #FFFFFF;
+  border-radius: 8px;
+  padding: 20px;
+  margin-right: 20px;
+  height: 100vh; /* Full height for desktop */
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.my-orders h2 {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.tabs button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f0f0f0;
+  color: #333;
+  transition: background-color 0.3s ease;
+}
+
+.tabs button:hover {
+  background-color: #e0e0e0;
+}
+
+.tabs button.active {
+  background-color: #4CAF50; /* Active tab color */
+  color: white;
+}
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  overflow-y: auto; /* Scrollable list for overflow */
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #FFFFFF;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.order-image {
+   /* Fixed width for the image */
+  height: 90px;
+  border-radius: 8px;
+  margin-right: 15px;
+  object-fit: cover; /* Ensure the image scales properly */
+  background-color: #f7f7f7; /* Placeholder background for missing images */
+}
+
+.order-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.order-details h4 {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.order-total {
+  font-weight: bold;
+  color: #4CAF50;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.order-flex {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .my-orders {
+    width: 100%; /* Full width on tablets and smaller screens */
+    margin-right: 0;
+    height: auto; /* Adjust height for content */
+    padding: 15px;
   }
-  
-  .my-orders h2 {
-    font-size: 18px;
-    margin-bottom: 15px;
-  }
-  
+
   .tabs {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-    font-family: 'Poppins', sans-serif;
+ /* Allow tabs to wrap on smaller screens */
+    gap: 5px;
   }
-  
+
   .tabs button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-family: 'Poppins', sans-serif;
+    width: 100%; /* Full-width buttons for better touch interaction */
+    text-align: center;
+    padding: 8px 10px;
   }
-  
-  .tabs button.active {
-    background-color: #4CAF50;
-    color: white;
-  }
-  
+
   .orders-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    font-family: 'Poppins', sans-serif;
+    gap: 10px;
   }
-  
+
   .order-item {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    background: white;
-    font-family: 'Poppins', sans-serif;
-   
+  /* Stack content vertically */
+    align-items: flex-start;
+    text-align: left;
+    padding: 15px;
   }
-  
+
   .order-image {
-    width: 100%;
-    height: 90px;
-    border-radius: 8px;
-    margin-right: 15px;
+    width: 100%; /* Full-width image on smaller screens */
+    height: auto;
+    margin-right: 0;
+    margin-bottom: 10px; /* Space below the image */
   }
-  
+
+  .order-details {
+    width: 100%; /* Expand details to full width */
+  }
+
   .order-details h4 {
-    margin: 0;
-    font-size: 16px;
+    font-size: 14px; /* Reduce font size for smaller screens */
   }
-  
+
   .order-total {
-    font-weight: bold;
+    font-size: 12px; /* Adjust size for smaller layouts */
   }
-  
-  .order-flex{
-    display: flex;
-    flex-direction: row;
-    gap: 15px;
+}
+
+@media (max-width: 480px) {
+  .my-orders {
+    padding: 10px; /* Compact padding for smaller devices */
   }
+
+  .tabs button {
+    padding: 6px 8px; /* Smaller padding for touch buttons */
+    font-size: 12px;
+  }
+
+  .order-item {
+    padding: 10px; /* Compact padding */
+  }
+
+  .order-image {
+    
+  }
+
+  .order-details h4 {
+    font-size: 12px;
+  }
+
+  .order-total {
+    font-size: 10px;
+  }
+}

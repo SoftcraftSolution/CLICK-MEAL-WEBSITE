@@ -1,8 +1,8 @@
 /* src/components/registerpopup.css */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-/* In src/components/registerpopup.css */
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
 
+/* Overlay for register popup */
 .register-popup-overlay {
   position: fixed;
   top: 0;
@@ -17,50 +17,64 @@
   font-family: 'Poppins', sans-serif;
 }
 
+/* Register popup content container */
 .register-popup-content {
   display: flex;
   background: white;
   border-radius: 8px;
   overflow: hidden;
-  width: 600px;
+  width: 50%; /* Default width for larger screens */
   font-family: 'Poppins', sans-serif;
+  max-width: 100%; /* Prevents it from exceeding 100% of the screen width */
+  box-sizing: border-box; /* Ensures padding is included in width calculation */
 }
 
+/* Image container inside popup */
 .register-popup-image img {
   width: 100%;
   height: 100%;
+  object-fit: cover; /* Ensures image scales appropriately without overflow */
 }
 
 .register-popup-image {
   width: 50%;
 }
 
+/* Form container inside popup */
 .register-popup-form {
-  width: 50%;
+  width: 50%; /* Takes the other 50% of the container */
   padding: 20px;
   position: relative;
   text-align: center;
   font-family: 'Poppins', sans-serif;
+  box-sizing: border-box; /* Prevents padding from exceeding the container width */
+  overflow: hidden; /* Ensures no overflow */
 }
 
 .register-popup-form h2 {
   margin: 0 0 10px;
 }
 
+/* Form elements */
 .register-popup-form form {
   display: flex;
   flex-direction: column;
+  gap: 10px; /* Added gap between form elements */
 }
 
 .register-popup-form input,
-.register-popup-form select { /* Applying same styles to select as inputs */
-  margin: 10px 0;
+.register-popup-form select { /* Apply same styles to select as inputs */
+ 
   padding: 12px;
   border-radius: 4px;
   border: 1px solid #8B9094;
   font-family: 'Nunito', sans-serif;
+  box-sizing: border-box; /* Ensures padding is included within width */
+  width: 100%; /* Ensures inputs fill available space */
+  overflow: hidden; /* Prevents content overflow */
 }
 
+/* Button styling */
 .register-popup-form button {
   margin-top: 10px;
   padding: 10px;
@@ -69,13 +83,17 @@
   border-radius: 4px;
   cursor: pointer;
   font-family: 'Poppins', sans-serif;
+  width: 100%; /* Ensures the button takes up full width */
+  box-sizing: border-box;
 }
 
+/* Link inside the form */
 .register-popup-form a {
   color: #4CAF50;
   text-decoration: none;
 }
 
+/* Close button for the popup */
 .register-close-button {
   position: absolute;
   top: 10px;
@@ -86,6 +104,7 @@
   cursor: pointer;
 }
 
+/* Popup title styling */
 .register-popup-title {
   padding-bottom: 5px;
   padding-top: 5px;
@@ -93,6 +112,7 @@
   font-weight: 500;
 }
 
+/* Locked input wrapper */
 .locked-input-wrapper {
   position: relative;
   display: flex;
@@ -107,6 +127,84 @@
 .lock-icon {
   position: absolute;
   right: 10px;
-  color: #ccc; /* You can adjust the color */
+  color: #ccc; /* Adjust color */
   pointer-events: none; /* Makes the icon non-interactive */
+}
+
+/* Mobile responsiveness for smaller screens */
+@media (max-width: 768px) {
+  /* Adjust the width of the popup content */
+  .register-popup-content {
+    width: 80%; /* Reduce width to 80% of the screen */
+    flex-direction: column; /* Stack the image and form vertically */
+  }
+
+  /* Hide the image on smaller screens */
+  .register-popup-image {
+    display: none; /* Hide image section on small screens */
+  }
+
+  /* Form section adjustment */
+  .register-popup-form {
+    width: 100%; /* Form takes full width */
+    padding: 15px; /* Reduce padding for smaller screens */
+  }
+
+  /* Adjust button size for smaller screens */
+  .register-popup-form button {
+    padding: 12px; /* Adjust button padding */
+    font-size: 14px; /* Reduce font size */
+  }
+
+  /* Form input adjustments */
+  .register-popup-form input,
+  .register-popup-form select {
+    padding: 10px; /* Reduce padding */
+    font-size: 14px; /* Reduce font size */
+  }
+
+  /* Close button adjustments */
+  .register-close-button {
+    top: 5px;
+    right: 5px;
+    font-size: 14px; /* Reduce close button size */
+  }
+}
+
+/* Mobile responsiveness for very small screens */
+@media (max-width: 480px) {
+  /* Further adjust the popup width */
+  .register-popup-content {
+    width: 90%; /* Further reduce width to 90% */
+    flex-direction: column; /* Stack vertically */
+  }
+
+  /* Hide the image section on very small screens */
+  .register-popup-image {
+    display: none; /* Ensure the image is hidden */
+  }
+
+  /* Form section adjustment */
+  .register-popup-form {
+    padding: 10px; /* Reduce padding further */
+  }
+
+  /* Adjust button and input sizes for very small screens */
+  .register-popup-form input,
+  .register-popup-form select {
+    padding: 8px; /* Smaller padding */
+    font-size: 13px; /* Smaller font size */
+  }
+
+  .register-popup-form button {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  /* Close button */
+  .register-close-button {
+    top: 5px;
+    right: 5px;
+    font-size: 12px;
+  }
 }

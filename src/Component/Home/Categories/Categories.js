@@ -30,7 +30,7 @@ const Categories = () => {
     <div className="categories-section">
       <div className="categories-header">
         <h2 className="categories-title">Categories</h2>
-        <a href="#" className="view-all-link">View All</a>
+        
       </div>
       {isLoading ? (
         <p>Loading categories...</p>

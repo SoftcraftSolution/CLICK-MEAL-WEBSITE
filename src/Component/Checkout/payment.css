@@ -1,33 +1,143 @@
+/* Payment Summary Container */
 .payment-summary {
-    margin-top: 20px;
-    padding: 15px;
-    background-color: #FFFFFF;
-    border-radius: 8px;
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+}
+
+/* Payment Summary Styles */
+.payment-summary {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.payment-summary h2,
+.payment-summary h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.payment-summary p {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.payment-summary button {
+  padding: 10px 20px;
+  background-color: #61AE5A;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.payment-summary button:hover {
+  background-color: #4d8f46;
+}
+
+/* Success and Error Messages */
+.success-message {
+  color: green;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+
+/* Header */
+.payment-summary h2 {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+/* Paragraphs and Sub-Headers */
+.payment-summary p, .payment-summary h3 {
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.payment-summary h3 {
+  font-weight: bold;
+}
+
+/* Button Styling */
+.payment-summary button {
+  width: 100%;
+  padding: 12px;
+  background-color: #4CAF50;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  /* Payment summary container */
+  .payment-summary {
+    padding: 12px; /* Slightly reduced padding for smaller screens */
   }
-  
+
+  /* Header */
   .payment-summary h2 {
-    font-size: 18px;
-    margin-bottom: 15px;
+    font-size: 16px; /* Reduced font size for better fitting */
+    margin-bottom: 12px;
   }
-  
+
+  /* Paragraphs and Sub-Headers */
   .payment-summary p, .payment-summary h3 {
-    margin: 10px 0;
-    font-size: 14px;
+    font-size: 12px; /* Smaller text for mobile */
+    margin: 8px 0;
   }
-  
+
   .payment-summary h3 {
-    font-weight: bold;
+    font-size: 14px; /* Slightly larger size for sub-headers */
   }
-  
+
+  /* Button Styling */
   .payment-summary button {
-    width: 100%;
-    padding: 12px;
-    background-color: #4CAF50;
-    color: white;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-top: 10px;
+    padding: 10px; /* Reduced padding for a more compact button */
+    font-size: 14px; /* Adjust font size for button text */
   }
-  
+}
+
+@media (max-width: 480px) {
+  /* Payment summary container */
+  .payment-summary {
+    padding: 10px; /* Further reduced padding for very small screens */
+  }
+
+  /* Header */
+  .payment-summary h2 {
+    font-size: 14px; /* Even smaller header size */
+    margin-bottom: 10px;
+  }
+
+  /* Paragraphs and Sub-Headers */
+  .payment-summary p, .payment-summary h3 {
+    font-size: 12px; /* Uniform text size for better readability */
+    margin: 6px 0;
+  }
+
+  .payment-summary h3 {
+    font-size: 13px; /* Slightly larger sub-header size for clarity */
+  }
+
+  /* Button Styling */
+  .payment-summary button {
+    padding: 8px; /* Smaller button padding */
+    font-size: 12px; /* Smaller font size for very small screens */
+  }
+}

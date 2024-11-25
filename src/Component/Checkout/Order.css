@@ -1,67 +1,144 @@
+/* Order Info Container */
 .order-info {
-    width: 30%;
-    padding: 20px;
-    background-color: #FFFFFF;
-    border-radius: 8px;
-    font-family: 'Poppins', sans-serif;
+  width: 30%;
+  padding: 20px;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+ /* Center the container */
+}
+
+/* Header */
+.order-info h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+/* Order Item */
+.order-item {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 10px;
+}
+
+.order-item img {
+  width: 90px;
+  height: 100px;
+  border-radius: 8px;
+  margin-right: 10px;
+}
+
+/* Order Details */
+.order-details {
+  flex-grow: 1;
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+}
+
+/* Quantity Control */
+.quantity-control {
+  display: flex;
+  align-items: center;
+}
+
+.order-quantity-control button {
+  width: 24px;
+  height: 24px;
+  background-color: #61AE5A;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#plusbutton {
+  background-color: #61AE5A;
+}
+
+#minusbutton {
+  color: #61AE5A;
+}
+
+.minus-button {
+  width: 24px;
+  height: 24px;
+  background-color: #FFFFFF;
+  color: #61AE5A;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 1px solid;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  /* Order info container */
+  .order-info {
+    width: 80%; /* Expand to fit on smaller screens */
+    padding: 15px;
   }
-  
+
+  /* Header */
   .order-info h2 {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 15px;
+    font-size: 16px;
+    margin-bottom: 12px;
   }
-  
+
+  /* Order item */
+  .order-item img {
+    width: 70px; /* Smaller images for mobile */
+    height: 80px;
+    margin-right: 8px;
+  }
+
+  /* Quantity control buttons */
+  .order-quantity-control button {
+    width: 20px;
+    height: 20px;
+    font-size: 12px; /* Smaller button text */
+  }
+
+  /* Adjust margin and padding */
   .order-item {
-    display: flex;
-    align-items: flex-end;
+    margin-bottom: 8px;
+  }
+
+  .minus-button, .order-quantity-control button {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Order info container */
+  .order-info {
+    width: 100%; /* Full width for very small screens */
+    padding: 10px;
+  }
+
+  /* Header */
+  .order-info h2 {
+    font-size: 14px;
     margin-bottom: 10px;
   }
-  
+
+  /* Order item */
   .order-item img {
-    width: 90px;
-    height: 100px;
-    border-radius: 8px;
-    margin-right: 10px;
+    width: 100px;
+    margin-right: 5px;
   }
-  
-  .order-details {
-    flex-grow: 1;
-    display: flex;
-    gap: 5px;
-    flex-direction: column;
-  }
-  
-  .quantity-control {
-    display: flex;
-    align-items: center;
-  }
-  
+
+  /* Quantity control buttons */
   .order-quantity-control button {
-    width: 24px;
-    height: 24px;
-    background-color: #61AE5A;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-  }
-  
-  #plusbutton{
-    background-color: #61AE5A;
+    width: 18px;
+    height: 18px;
+    font-size: 10px; /* Even smaller button text */
   }
 
-  #minusbutton{
-    color: #61AE5A;
+  .minus-button, .order-quantity-control button {
+    width: 20px;
+    height: 20px;
   }
-
-  .minus-button{
-    width: 24px;
-    height: 24px;
-    background-color: #FFFFFF;
-    color: #61AE5A;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    border: 1px solid;
-  }
+}

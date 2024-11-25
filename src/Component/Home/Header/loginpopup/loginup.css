@@ -1,7 +1,6 @@
-/* src/components/loginpopup.css */
-
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap'); /* Import Nunito font */
 
+/* Login popup overlay */
 .login-popup-overlay {
   position: fixed;
   top: 0;
@@ -15,45 +14,49 @@
   z-index: 1000;
 }
 
+/* Login popup content */
 .login-popup-content {
   display: flex;
   background: white;
- 
   overflow: hidden;
   width: 600px;
-  height: 450px; /* Increase height for a more spacious look */
-  font-family: 'Nunito', sans-serif; /* Apply Nunito font */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+  height: 450px; /* Increased height for spacious look */
+  font-family: 'Nunito', sans-serif;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 100%; /* Ensure it fits smaller screens */
+  box-sizing: border-box;
+}
+
+/* Image section inside popup */
+.login-popup-image {
+  width: 50%;
 }
 
 .login-popup-image img {
   width: 100%;
   height: 100%;
-
+  object-fit: cover;
 }
 
-.login-popup-image {
-  width: 50%;
-}
-
+/* Form section inside popup */
 .login-popup-form {
   width: 50%;
-  padding: 30px; /* Increase padding for spacing */
+  padding: 30px; /* Increased padding for spacing */
   position: relative;
   text-align: center;
-
+  box-sizing: border-box;
 }
 
 .login-popup-form h2 {
   margin: 0 0 10px;
   font-size: 24px;
   font-weight: 700;
-  color: #333; /* Darker color for title */
+  color: #333;
 }
 
 .login-popup-form p {
   font-size: 14px;
-  color: #666; /* Subtle color for description text */
+  color: #666;
   margin-bottom: 20px;
 }
 
@@ -71,6 +74,7 @@
   color: #333;
   background-color: #f9f9f9;
   transition: border-color 0.3s;
+  box-sizing: border-box;
 }
 
 .login-popup-form input:focus {
@@ -82,7 +86,6 @@
   margin-top: 15px;
   padding: 12px;
   font-size: 16px;
-  
   color: #000000;
   border: none;
   border-radius: 4px;
@@ -92,7 +95,8 @@
 }
 
 .login-popup-form button:hover {
-
+  background-color: #61AE5A;
+  color: white;
 }
 
 .login-popup-form a {
@@ -120,4 +124,79 @@
 
 .login-close-button:hover {
   color: #555;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  /* Adjust content width for smaller screens */
+  .login-popup-content {
+    width: 80%; /* Reduce width to 80% of the screen */
+    flex-direction: column; /* Stack the image and form vertically */
+    height: auto; /* Allow for dynamic height based on content */
+  }
+
+  /* Hide image section on small screens */
+  .login-popup-image {
+    display: none; /* Hide image section */
+  }
+
+  /* Adjust form section to take full width */
+  .login-popup-form {
+    width: 100%;
+    padding: 20px; /* Adjust padding for smaller screens */
+  }
+
+  /* Button size adjustments */
+  .login-popup-form button {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  /* Form input adjustments */
+  .login-popup-form input {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  /* Close button adjustments */
+  .login-close-button {
+    top: 5px;
+    right: 5px;
+    font-size: 16px;
+  }
+}
+
+/* Mobile responsiveness for very small screens */
+@media (max-width: 480px) {
+  /* Further reduce content width for very small screens */
+  .login-popup-content {
+    width: 90%; /* Further reduce width to 90% */
+  }
+
+  /* Hide image section on very small screens */
+  .login-popup-image {
+    display: none; /* Ensure the image is hidden */
+  }
+
+  /* Form padding and button adjustments */
+  .login-popup-form {
+    padding: 15px; /* Reduce padding further */
+  }
+
+  .login-popup-form button {
+    padding: 8px;
+    font-size: 13px;
+  }
+
+  .login-popup-form input {
+    padding: 8px;
+    font-size: 13px;
+  }
+
+  /* Close button size for small screens */
+  .login-close-button {
+    top: 5px;
+    right: 5px;
+    font-size: 14px;
+  }
 }

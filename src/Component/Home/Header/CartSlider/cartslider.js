@@ -54,6 +54,7 @@ const CartSlider = ({ isOpen, onClose }) => {
   };
 
   const handleCheckout = () => {
+    onClose();
     navigate('/pract');
   };
 

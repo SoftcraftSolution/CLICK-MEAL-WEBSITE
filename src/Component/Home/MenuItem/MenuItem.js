@@ -2,6 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 import axios from 'axios'; // Import Axios
 import Cookies from 'js-cookie'; // Import js-cookie for cookie handling
+import { toast, ToastContainer } from 'react-toastify'; // Import toast and ToastContainer
+import 'react-toastify/dist/ReactToastify.css'; // Import the default toast styles
 import './MenuItem.css';
 
 const MenuItem = ({ item }) => {
@@ -19,7 +21,7 @@ const MenuItem = ({ item }) => {
     try {
       const userId = Cookies.get('userId'); // Retrieve userId from cookies
       if (!userId) {
-        alert('User ID not found. Please log in.');
+        toast.error('User ID not found. Please log in.'); // Show error toast for login
         return;
       }
 
@@ -35,13 +37,13 @@ const MenuItem = ({ item }) => {
 
       // Handle the response
       if (response.data && response.data.message) {
-        alert(response.data.message);
+        toast.success(response.data.message); // Show success toast with server response
       } else {
-        alert('Item added to cart!');
+        toast.success('Item added to cart!'); // Show success toast with default message
       }
     } catch (error) {
       console.error('Error adding item to cart:', error);
-      alert('Failed to add item to cart. Please try again.');
+      toast.error('Failed to add item to cart. Please try again.'); // Show error toast
     }
   };
 
@@ -61,6 +63,17 @@ const MenuItem = ({ item }) => {
           Add to Cart
         </button>
       </div>
+      
+      {/* ToastContainer for displaying toast notifications */}
+      <ToastContainer 
+        position="top-center" 
+        autoClose={3000} 
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeButton={false}
+        pauseOnHover={false}
+        className="toast-container"
+      />
     </div>
   );
 };

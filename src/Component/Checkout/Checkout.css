@@ -1,7 +1,6 @@
 .checkout-container {
   font-family: 'Arial', sans-serif;
-
-background-color: #f4f6fa;
+  background-color: #f4f6fa;
   padding: 20px;
   height: 100%;
 }
@@ -17,4 +16,31 @@ background-color: #f4f6fa;
   gap: 20px;
   justify-content: center;
   height: 100vh;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .checkout-main-content {
+    flex-direction: column; /* Stack items vertically for smaller screens */
+    align-items: center; /* Center items vertically */
+    height: auto; /* Adjust height for better mobile display */
+  }
+
+  .checkout-header h1 {
+    font-size: 22px; /* Slightly reduce font size for medium-sized screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .checkout-container {
+    padding: 10px; /* Reduce padding for very small screens */
+  }
+
+  .checkout-header h1 {
+    font-size: 20px; /* Further reduce font size for very small screens */
+  }
+
+  .checkout-main-content {
+    gap: 15px; /* Reduce the gap between elements */
+  }
 }

@@ -7,6 +7,8 @@ import ProductDetails from './Details/Details';
 import ProductExtras from './ProductExtras/ProductExtras';
 import QuantitySelector from './QuantitySelector/quantityselector';
 import './Product.css';
+import { toast, ToastContainer } from 'react-toastify'; // Import toast and ToastContainer
+import 'react-toastify/dist/ReactToastify.css'; // Import toastify styles
 
 const ProductPage = () => {
   const location = useLocation();
@@ -18,38 +20,37 @@ const ProductPage = () => {
   if (!product) {
     return <p>No product data available. Please select a product.</p>;
   }
+  console.log(product);
 
-  const handleAddToCart = async () => {
-    // Get the userId from cookies
-    const userId = Cookies.get('userId'); // Retrieve userId from cookies
-
-    if (!userId) {
-      alert('User is not logged in. Please log in to add items to the cart.');
-      return;
-    }
-
+  const handleAddToCart = async (e) => {
+    e.stopPropagation(); // Prevent parent click handler
     try {
-      // Updated request structure to include an items array
+      const userId = Cookies.get('userId'); // Retrieve userId from cookies
+      if (!userId) {
+        toast.error('User ID not found. Please log in.'); // Show error toast for login
+        return;
+      }
+
+      const itemsToAdd = [
+        { itemId: product._id, quantity: quantity } // Add item with selected quantity
+      ];
+
+      console.log(itemsToAdd);
+      // Sending POST request to add item to cart
       const response = await axios.post('https://clickmeal-backend.vercel.app/user/add-cart', {
         userId: userId,
-        items: [
-          {
-            itemId: product.id, // Replace with the actual product ID field if different
-            quantity: quantity
-          }
-        ]
+        items: itemsToAdd
       });
 
-      if (response.data?.message) {
-        console.log(response.data.message);
-        alert('Item added to cart successfully!');
+      // Handle the response
+      if (response.data && response.data.message) {
+        toast.success(response.data.message); // Show success toast with server response
       } else {
-        console.error('Unexpected response format:', response);
-        alert('Error adding item to cart.');
+        toast.success('Item added to cart!'); // Show success toast with default message
       }
     } catch (error) {
-      console.error('Error adding item to cart:', error.response?.data || error.message);
-      alert('Failed to add item to cart. Please try again.');
+      console.error('Error adding item to cart:', error);
+      toast.error('Failed to add item to cart. Please try again.'); // Show error toast
     }
   };
 
@@ -66,6 +67,16 @@ const ProductPage = () => {
           Add to Cart
         </button>
       </div>
+
+      {/* ToastContainer for displaying toast notifications */}
+      <ToastContainer 
+        position="top-center" 
+        autoClose={3000} 
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeButton={false}
+        pauseOnHover={false}
+      />
     </div>
   );
 };

@@ -1,167 +1,185 @@
+/* General Styling */
 .order-information {
-    width: 35%;
-    background: #FFFFFF;
-    border-radius: 8px;
-    padding: 20px;
-    font-family: 'Poppins', sans-serif;
+  width: 35%; /* Retain width for desktop */
+  background: #FFFFFF;
+  border-radius: 8px;
+  padding: 20px;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.order-information h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.delivery-status {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.status-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  flex: 1; /* Allow equal spacing between steps */
+}
+
+.status-step .circle {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: #4CAF50;
+  border: 2px solid #4CAF50;
+  border-radius: 50%;
+  margin-bottom: 5px;
+}
+
+.status-step.completed .circle {
+  color: white;
+  background-color: #4CAF50; /* Green filled circle for completed steps */
+  border-color: #4CAF50;
+}
+
+.status-line {
+  flex: 1;
+  height: 2px;
+  background-color: #ccc;
+  margin: 0 10px;
+}
+
+.status-step.completed + .status-line {
+  background-color: #4CAF50;
+}
+
+.order-actions {
+  margin-top: 15px;
+  display: flex;
+   /* Allow wrapping of buttons on smaller screens */
+  gap: 10px; /* Spacing between buttons */
+}
+
+.download-button,
+.order-again-button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+}
+
+.download-button {
+  border: 1px solid #61AE5A;
+  background-color: #FFFFFF;
+  color: #61AE5A;
+}
+
+.order-again-button {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.delivereddd-status {
+  display: flex;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  color: #646464;
+}
+
+.delivered-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+}
+
+.share-feedback-button {
+  font-size: 14px;
+  color: #4CAF50;
+  font-weight: 600;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #CED4DA;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.info-inside-flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-bottom: 15px;
+}
+
+.order-info-bottom {
+  border-bottom: 1px solid #CED4DA;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .order-information {
+    width: 100%; /* Full width for tablets and smaller screens */
+    padding: 15px; /* Compact padding */
+    box-shadow: none; /* Optional: Remove shadow on smaller screens */
   }
-  
-  .order-information h2 {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  
+
   .delivery-status {
-    display: flex;
-    justify-content: space-between;
-    margin: 15px 0;
-    font-family: 'Poppins', sans-serif;
+    flex-direction: column; /* Stack status steps vertically */
+    align-items: flex-start;
   }
-  
+
   .status-step {
-    flex: 1;
-    padding: 5px;
-    text-align: center;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    flex-direction: row; /* Align items horizontally in vertical stacking */
+    justify-content: flex-start;
+    margin-bottom: 10px; /* Add spacing between steps */
   }
-  
-  .status-step.completed {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    white-space: nowrap;
-  }
-  
-  .status-step.active {
-    background-color: #ffd700;
-    color: white;
-    border: none;
-  }
-  
-  .status-text {
-    color: #4CAF50;
-    font-weight: bold;
-    font-family: 'Poppins', sans-serif;
-  }
-  
-  .order-actions {
-    margin-top: 15px;
-  }
-  
-  .download-button,
-  .order-again-button {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 10px;
-    font-family: 'Poppins', sans-serif;
-  }
-  
-  .download-button {
-    
-      border: 1px solid;
-      background-color: #FFFFFF;
-      color: #61AE5A;
-      border-radius: 8px;
-  
-  }
-  
-  .order-again-button {
-    background-color: #4CAF50;
-    color: white;
-  }
-  
 
-
-
-
-
-  .delivery-status {
-    display: flex;
-    align-items: center;
-    margin: 20px 0;
-  }
-  
-  .status-step {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    position: relative;
-  }
-  
   .status-step .circle {
-    width: 20px;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    color: #4CAF50;
-    border: 2px solid #4CAF50;
-    border-radius: 50%;
-    line-height: 1;
-    margin-bottom: 5px;
+    margin-bottom: 0; /* Remove margin when in row layout */
+    margin-right: 10px; /* Add spacing between circle and text */
   }
-  
-  .status-step.completed .circle {
-    color: #4CAF50; /* Green check mark color */
-    border-color: #4CAF50;
-  }
-  
-  .status-step .circle:not(.completed) {
-    color: #ccc;
-    border-color: #ccc;
-  }
-  
+
   .status-line {
-    flex: 1;
-    height: 2px;
-    background-color: #ccc;
-    margin: 0 10px;
-  }
-  
-  .status-step.completed + .status-line {
-    background-color: #4CAF50;
-  }
-  
-  .order-info-bottom{
-    border-bottom: 1px solid #CED4DA;
+    display: none; /* Hide connecting line in stacked layout */
   }
 
-  .delivereddd-status {
+  .order-actions {
     display: flex;
-    align-items: center;
-    font-family: 'Poppins', sans-serif;
-    color: #646464; /* Optional, for font styling */
+    justify-content: center;
+    flex-direction: row; /* Stack buttons vertically */
+    align-items: stretch;
+    gap: 10px;
   }
-  
-  .delivered-icon {
-    width: 16px; /* Adjust size as needed */
-    height: 16px; /* Adjust size as needed */
-    margin-right: 5px; /* Space between the icon and text */
+
+  .info-inside-flex {
+    flex-direction: column; /* Stack elements */
+    align-items: flex-start; /* Align to the left */
+    gap: 10px; /* Spacing between items */
   }
-  
+}
+
+@media (max-width: 480px) {
+  .order-information {
+    padding: 10px; /* More compact padding for smaller screens */
+  }
+
+  .order-actions button {
+    font-size: 12px; /* Adjust button font size for smaller screens */
+    padding: 8px 10px;
+    width: 50%;
+  }
+
   .share-feedback-button {
-   
+    font-size: 12px; /* Adjust font size for feedback button */
+  }
+
+  .status-step .circle {
+    width: 18px; /* Slightly smaller circle */
+    height: 18px;
     font-size: 14px;
-    color: #4CAF50; /* Green color similar to the image */
-    font-weight: 600;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #CED4DA; /* Bottom border for the button */
-    cursor: pointer;
-    margin-top: 10px; /* Add some spacing if needed */
   }
-
-  .info-inside-flex{
-    display: flex;
-    flex-direction: row;
-    padding-bottom: 15px;
-    justify-content: space-between;
-
-  }
-  
-
-  
+}

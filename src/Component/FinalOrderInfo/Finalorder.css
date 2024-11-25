@@ -3,6 +3,21 @@
     gap: 20px;
     padding: 20px;
     background-color: #f4f6fa;
-    justify-content:center ;
+    justify-content: center;
 }
-  
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .final-order-container {
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items vertically */
+        gap: 10px; /* Adjust gap for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .final-order-container {
+        padding: 10px; /* Reduce padding on very small screens */
+        gap: 8px; /* Further reduce gap */
+    }
+}

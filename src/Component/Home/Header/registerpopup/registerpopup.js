@@ -3,6 +3,9 @@ import axios from 'axios';
 import './registerpopup.css';
 import sampleImage from '../../../../assets/registerimagetopost.PNG';
 import LoginPopup from '../loginpopup/loginup'; // Import the LoginPopup component
+import Cookies from 'js-cookie'; // Import js-cookie
+import { ToastContainer, toast } from 'react-toastify'; // Import Toast components from react-toastify
+import 'react-toastify/dist/ReactToastify.css'; // Import toast styles
 
 const RegisterPopup = ({ isOpen, onClose, onSwitchToLogin }) => {
   const [companies, setCompanies] = useState([]);
@@ -14,6 +17,7 @@ const RegisterPopup = ({ isOpen, onClose, onSwitchToLogin }) => {
     phoneNumber: ''
   });
   const [showLogin, setShowLogin] = useState(false); // State to control LoginPopup visibility
+  const [phoneError, setPhoneError] = useState(''); // State to store phone validation error message
 
   useEffect(() => {
     const fetchCompanies = async () => {
@@ -34,7 +38,17 @@ const RegisterPopup = ({ isOpen, onClose, onSwitchToLogin }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    // Validate phone number for exactly 10 digits
+    if (name === 'phoneNumber' && value.length <= 10) {
+      setFormData({ ...formData, [name]: value });
+      if (value.length === 10 && !/^\d{10}$/.test(value)) {
+        setPhoneError('Phone number must be exactly 10 digits.');
+      } else {
+        setPhoneError('');
+      }
+    } else if (name !== 'phoneNumber') {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const handleCompanyChange = (e) => {
@@ -43,6 +57,10 @@ const RegisterPopup = ({ isOpen, onClose, onSwitchToLogin }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (phoneError) {
+      alert('Please fix the phone number error before submitting.');
+      return;
+    }
     try {
       const response = await axios.post('https://clickmeal-backend.vercel.app/user/register', {
         fullName: formData.fullName,
@@ -51,7 +69,20 @@ const RegisterPopup = ({ isOpen, onClose, onSwitchToLogin }) => {
         phoneNumber: formData.phoneNumber,
         companyId: selectedCompanyId
       });
-      console.log('User registered successfully:', response.data);
+
+      // Assuming the response contains a userId
+      const userId = response.data.userId;
+
+      // Store the userId in cookies (with an expiry time of 7 days, adjust as needed)
+      Cookies.set('userId', userId, { expires: 7 });
+
+      console.log('User registered successfully:', response.data.message);
+
+      // Show a toast message for successful registration
+      if (response.data && response.data.message) {
+        toast.success(response.data.message); // Show success toast with server response
+      } 
+      
 
       setShowLogin(true); // Trigger the LoginPopup display
       onClose(); // Close the RegisterPopup
@@ -63,6 +94,7 @@ const RegisterPopup = ({ isOpen, onClose, onSwitchToLogin }) => {
 
   return (
     <>
+      <ToastContainer position="top-right" autoClose={5000} hideProgressBar={true} />
       {showLogin ? (
         <LoginPopup isOpen={true} onClose={() => setShowLogin(false)} onSwitchToRegister={() => setShowLogin(false)} />
       ) : (
@@ -89,8 +121,10 @@ const RegisterPopup = ({ isOpen, onClose, onSwitchToLogin }) => {
                   placeholder="Phone Number"
                   value={formData.phoneNumber}
                   onChange={handleChange}
+                  maxLength="10" // Limit input to 10 characters
                   required
                 />
+                {phoneError && <p className="error-message">{phoneError}</p>} {/* Display error message if phone number is invalid */}
                 <input
                   type="email"
                   name="email"
@@ -119,7 +153,7 @@ const RegisterPopup = ({ isOpen, onClose, onSwitchToLogin }) => {
                   Continue
                 </button>
               </form>
-              <p>
+              <p style={{margin:"0px",paddingTop:"10px"}}>
                 Already have an account?{' '}
                 <a href="#" onClick={(e) => { e.preventDefault(); onSwitchToLogin(); }}>Login</a>
               </p>

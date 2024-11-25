@@ -1,272 +1,283 @@
+/* Extras Container */
 .extras {
-    margin-bottom: 20px;
-    padding: 10px; /* Added padding for centering effect */
+  margin-bottom: 20px;
+  padding: 10px; /* Added padding for centering effect */
+}
+
+.delivery-payment {
+  width: 30%;
+  padding: 20px;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  /* Centers the container */
+}
+
+/* Header for extras */
+.extras h3 {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Link in the extras header */
+.extras h3 a {
+  font-size: 14px;
+  color: #4CAF50;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* Individual extra item */
+.extra-item {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Image styling inside extra item */
+.extra-item img {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  margin-right: 15px;
+}
+
+/* Extra Info inside each item */
+.extra-info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* Extra title */
+.extra-info h4 {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0;
+  color: #333;
+}
+
+/* Description text for extra item */
+.extra-info p {
+  font-size: 12px;
+  color: #777;
+  margin: 0;
+}
+
+/* Button inside extra item */
+.extra-info button {
+  width: 60%;
+  background-color: #FFFFFF;
+  color: #61AE5A;
+  border: 1px solid #61AE5A;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: 'Poppins', sans-serif;
+  margin-top: 5px;
+}
+
+/* Price styling */
+.extra-price {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-left: 15px;
+}
+
+/* Styling for partial visibility of card */
+.extra-item::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -50%;
+  bottom: 0;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(to right, transparent 50%, #f9f9f9 50%);
+}
+
+/* Scrollable container for extra items */
+.extra-list {
+  display: flex;
+  overflow-x: auto;
+  gap: 15px;
+  padding-bottom: 10px;
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+}
+
+.extra-list::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+
+/* Styling for extra items */
+.extra-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 15px;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  min-width: 200px; /* Ensures consistent width for items */
+  flex-shrink: 0;
+  width: 85%; /* Prevents shrinking when scrolling */
+}
+
+/* Image inside extra item */
+.extra-item img {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+/* Extra Info inside item */
+.extra-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  text-align: center;
+  width: 100%;
+}
+
+/* Text inside extra item */
+.extra-info p {
+  font-size: 12px;
+  color: #777;
+  margin: 0;
+}
+
+/* Button styling inside extra item */
+.extra-info button {
+  background-color: #FFFFFF;
+  color: #61AE5A;
+  border: 1px solid #61AE5A;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: 'Poppins', sans-serif;
+  margin-top: 5px;
+  width: 80%;
+}
+
+/* Price styling inside extra item */
+.extra-price {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-top: 10px;
+}
+
+/* Mobile responsiveness for smaller screens */
+@media (max-width: 768px) {
+  /* Adjust extras container padding */
+  .extras {
+    padding: 8px; /* Reduced padding for better fitting on smaller screens */
   }
-  
+
+  /* Adjust header size */
+  .extras h3 {
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+
+  /* Adjust extra item padding */
   .extra-item {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    background: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    margin-bottom: 10px; /* Added margin for better spacing */
+    padding: 12px;
   }
-  
+
+  /* Adjust extra item image size */
   .extra-item img {
     width: 60px;
     height: 60px;
-    border-radius: 8px;
-    margin-right: 10px;
+    margin-right: 12px;
   }
-  
-  .extra-info {
-    flex-grow: 1;
-  }
-  
+
+  /* Adjust extra item title size */
   .extra-info h4 {
-    font-size: 16px;
-    margin: 0; /* Ensures the title aligns better */
-  }
-  
-  .extra-info button {
-    padding: 5px 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .extra-price {
-    font-size: 16px;
-    font-weight: bold;
-  }
-  
-  .delivery-payment {
-    width: 30%;
-    padding: 20px;
-    background-color: #FFFFFF;
-    border-radius: 8px;
- /* Centers the container */
-  }
-  
-  .delivery-payment h2 {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 15px;
-  }
-  
-  .delivery-time p {
-    color: #4CAF50;
-    background-color: #e0f7df; /* Light green background for delivery time */
-    padding: 5px;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-  }
-  
-  .additional-items p {
-    font-size: 14px;
-    margin-top: 20px;
-  }
-  
-  .additional-items span {
-    color: #4CAF50;
-    cursor: pointer;
-    font-weight: bold;
-  }
-
-  /* Extras Container */
-.extras {
-    margin-bottom: 20px;
-  }
-  
-  .extras h3 {
-    font-size: 16px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .extras h3 a {
-    font-size: 14px;
-    color: #4CAF50;
-    cursor: pointer;
-    text-decoration: none;
-  }
-  
-  .extra-item {
-    display: flex;
-    align-items: center;
-    padding: 15px;
-    background: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 15px;
-    overflow: hidden;
-    position: relative;
-  }
-  
-  /* Image styling */
-  .extra-item img {
-    width: 80px;
-    height: 80px;
-    border-radius: 8px;
-    margin-right: 15px;
-  }
-  
-  /* Extra Info */
-  .extra-info {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-  
-  .extra-info h4 {
-    font-size: 14px;
-    font-weight: bold;
-    margin: 0;
-    color: #333;
-  }
-  
-  .extra-info p {
     font-size: 12px;
-    color: #777;
-    margin: 0;
   }
-  
+
+  /* Adjust button inside extra item */
   .extra-info button {
-    width: 60%
-    ;
-    background-color: #FFFFFF;
-    color: #61AE5A;
-    border: 1px solid #61AE5A;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 12px;
-    font-family: 'Poppins', sans-serif;
-    margin-top: 5px;
+    font-size: 10px;
+    padding: 4px 8px;
+    width: 100%;
   }
-  
-  /* Price styling */
+
+  /* Adjust price font size */
   .extra-price {
-    font-size: 16px;
-    font-weight: bold;
-    color: #333;
-    margin-left: 15px;
-  }
-  
-  /* Styling for the view of a partially visible card */
-  .extra-item::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: -50%;
-    bottom: 0;
-    width: 60%;
-    height: 100%;
-    background: linear-gradient(to right, transparent 50%, #f9f9f9 50%);
-  }
-  
-
-
-  /* Extras Container */
-.extras {
-    margin-bottom: 20px;
-  }
-  
-  .extras h3 {
-    font-size: 16px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .extras h3 a {
     font-size: 14px;
-    color: #4CAF50;
-    cursor: pointer;
-    text-decoration: none;
+    margin-left: 10px;
   }
-  
-  /* Scrollable container for cards */
+
+  /* Adjust extra list layout */
   .extra-list {
-    display: flex;
-    overflow-x: auto;
-    gap: 15px;
-    padding-bottom: 10px;
-    scrollbar-width: none; /* For Firefox */
-    -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+    flex-direction: column; /* Stack items vertically on mobile */
   }
-  
-  .extra-list::-webkit-scrollbar {
-    display: none; /* For Chrome, Safari, and Opera */
-  }
-  
-  .extra-item {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 15px;
-    background: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    min-width: 200px; /* Ensures consistent width for items */
-    flex-shrink: 0;
-    width: 85%; /* Prevents shrinking when scrolling */
-  }
-  
-  /* Image styling */
-  .extra-item img {
-    width: 80px;
-    height: 80px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-  }
-  
-  /* Extra Info */
-  .extra-info {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    text-align: center;
-  }
-  
-  .extra-info p {
-    font-size: 12px;
-    color: #777;
-    margin: 0;
-  }
-  
-  .extra-info button {
 
-    background-color: #FFFFFF;
-    color: #61AE5A;
-    border: 1px solid #61AE5A;
-    border-radius: 5px;
-    cursor: pointer;
+  /* Adjust extra item layout */
+  .extra-item {
+    min-width: 100%; /* Ensure extra items take up full width */
+    flex-direction: column;
+    align-items: flex-start;
+    box-sizing: border-box;
+  }
+
+  /* Make delivery payment take full width on smaller screens */
+  .delivery-payment {
+    width: 100%; /* Ensure delivery-payment takes up full width on smaller screens */
+    padding: 15px;
+  }
+}
+
+/* Mobile responsiveness for very small screens */
+@media (max-width: 480px) {
+  /* Further reduce padding in extras container */
+  .extras {
+    padding: 5px;
+  }
+
+  /* Further reduce font size for extra header */
+  .extras h3 {
     font-size: 12px;
-    font-family: 'Poppins', sans-serif;
-    margin-top: 5px;
-    width: 80%;
   }
-  
-  /* Price styling */
+
+  /* Further reduce image size in extra item */
+  .extra-item img {
+    width: 100%;
+    height: 50%;
+  }
+
+  /* Further reduce button font size */
+  .extra-info button {
+    font-size: 9px;
+    padding: 3px 6px;
+  }
+
+  /* Further reduce price font size */
   .extra-price {
-    font-size: 16px;
-    font-weight: bold;
-    color: #333;
-    margin-top: 10px;
+    font-size: 12px;
   }
-  
+
+  /* Make delivery payment take full width on very small screens */
+  .delivery-payment {
+    width: 100%; /* Ensure delivery-payment takes up full width on very small screens */
+    padding: 12px;
+  }
+}

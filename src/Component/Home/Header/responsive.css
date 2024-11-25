@@ -1,60 +1,69 @@
 /* Mobile-specific media queries */
 @media (max-width: 768px) {
-    /* Apply these styles to fix layout issues and prevent scrolling */
-    body, html {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      overflow-x: hidden; /* Prevent horizontal scrolling */
-      width: 100%; /* Ensure it fits the screen width */
-    }
-  
-    .header-container {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px;
-      width: 100%;
-      box-sizing: border-box;
-    }
-  
-    .header-logo {
-      max-width: 100%;
-      height: auto;
-    }
-  
-    .header-controls {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-grow: 1;
-      justify-content: flex-end;
-    }
-  
-    .header-date-picker, 
-    .header-company-selector {
-      display: inline-block;
-      font-size: 12px;
-      padding: 5px 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      box-sizing: border-box;
-      max-width: calc(50% - 5px); /* Adjust for spacing */
-    }
-  
-    .header-cart-icon {
-      display: flex;
-      gap: 10px;
-      justify-content: space-between;
-    }
-  
-    .header-cart-icon svg {
-      cursor: pointer;
-      font-size: 20px; /* Adjust size for consistency */
-    }
+  /* Apply these styles to fix layout issues and prevent scrolling */
+  body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    width: 100%; /* Ensure it fits the screen width */
   }
-  
+
+  .header-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .header-logo {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .header-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-grow: 1;
+    justify-content: flex-end;
+  }
+
+  .header-date-picker, 
+  .header-company-selector {
+    display: inline-block;
+    font-size: 12px;
+    padding: 5px 8px; /* Reduced padding */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
+    max-width: calc(45% - 5px); /* Reduced width */
+  }
+
+  /* Ensure cart icon container aligns well */
+  .header-cart-icon {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+  }
+
+  .header-cart-icon svg {
+    cursor: pointer;
+    font-size: 20px; /* Adjust size for consistency */
+  }
+
+  /* Optional: Add some additional padding or adjustments to ensure elements don't get too cramped */
+  .header-container {
+    padding: 8px; /* Reduced padding to prevent cramping on small screens */
+  }
+
+  .header-controls {
+    gap: 8px; /* Reduced the gap between controls for better fit */
+  }
+}

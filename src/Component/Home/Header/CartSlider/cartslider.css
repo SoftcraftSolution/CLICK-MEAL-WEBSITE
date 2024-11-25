@@ -15,13 +15,14 @@
 }
 
 .cart-slider {
-  width: 400px;
+  width: 400px; /* Default width for larger screens */
   height: 100%;
   background: white;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   font-family: 'Poppins', sans-serif;
+  transition: width 0.3s ease-in-out; /* Smooth transition for width change */
 }
 
 .cart-header {
@@ -30,7 +31,6 @@
   align-items: center;
   padding: 20px;
   background-color: #f3f3f3;
-
 }
 
 .cart-header h2 {
@@ -60,7 +60,6 @@
 .all-items-title {
   font-size: 16px;
   font-weight: 600;
-  
   color: #333;
 }
 
@@ -138,11 +137,10 @@
 
 .total-amount {
   display: flex;
- 
   align-items: center;
   font-size: 16px;
   color: #333;
-  gap:10px;
+  gap: 10px;
 }
 
 .total-amount h3 {
@@ -166,4 +164,61 @@
 
 .checkout-button:hover {
   background-color: #4d8f46;
+}
+
+/* Media Query for mobile responsiveness */
+@media (max-width: 768px) {
+  .cart-slider {
+    width: 270px; /* Reduced width on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .cart-slider {
+    width: 100%; /* Full width for very small screens */
+  }
+
+  .cart-header h2 {
+    font-size: 18px; /* Slightly smaller font on very small screens */
+  }
+
+  .cart-item-count {
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  .cart-item img {
+    width: 50px; /* Smaller image size on small screens */
+    height: 50px;
+  }
+
+  .item-details h4 {
+    font-size: 14px; /* Smaller font for item names */
+  }
+
+  .item-details p {
+    font-size: 10px; /* Smaller font for descriptions */
+  }
+
+  .item-price,
+  .item-total {
+    font-size: 12px; /* Smaller font for prices */
+  }
+
+  .quantity-control button {
+    width: 20px;
+    height: 20px; /* Smaller button size */
+  }
+
+  .quantity-control span {
+    font-size: 12px; /* Smaller font for quantity */
+  }
+
+  .total-amount h3 {
+    font-size: 16px; /* Smaller font size for total amount */
+  }
+
+  .checkout-button {
+    font-size: 14px; /* Smaller button text */
+  }
 }

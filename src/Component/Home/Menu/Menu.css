@@ -1,9 +1,8 @@
 /* src/components/Menu.css */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
-
 .menu-section {
-  padding-left:120px;
+  padding-left: 120px;
   text-align: left;
 }
 
@@ -23,7 +22,7 @@
   border-radius: 8px; /* Rounded corners for the container */
   background-color: #f9f9f9; /* Light background color */
   width: fit-content; /* Adjust width to fit content */
-  
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
 }
 
 .menu-tab {
@@ -53,4 +52,61 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   padding-top: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .menu-section {
+    padding-left: 20px; /* Reduce padding for tablets */
+  }
+
+  .menu-title {
+    font-size: 18px; /* Slightly smaller font size */
+  }
+
+  .menu-tabs {
+    gap: 8px;
+    padding: 8px;
+    justify-content: center; /* Center tabs on smaller screens */
+  }
+
+  .menu-tab {
+    padding: 6px 12px; /* Reduce padding for tabs */
+    font-size: 12px; /* Smaller font size for tabs */
+  }
+
+  .menu-items {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for tablets */
+    gap: 15px; /* Reduce gap between items */
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-section {
+    padding: 10px; /* Compact padding for mobile */
+  }
+
+  .menu-title {
+    font-size: 16px; /* Smaller title size for mobile */
+  }
+
+  .menu-tabs {
+   display: flex;
+   flex-wrap: nowrap; /* Stack tabs vertically */
+    gap: 5px;
+    align-items: flex-start; 
+    width: 97%;/* Align tabs to the left */
+  }
+
+  .menu-tab {
+    padding: 8px;
+    font-size: 12px;
+    width: 100%; /* Full-width tabs on mobile */
+    text-align: center;
+  }
+
+  .menu-items {
+    grid-template-columns: 1fr; /* Single column for mobile */
+    gap: 10px; /* Smaller gap for compact layout */
+  }
 }

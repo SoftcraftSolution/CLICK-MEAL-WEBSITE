@@ -76,7 +76,7 @@ const ProductExtras = ({ product1 }) => { // Pass itemId as a prop or define it 
       <div style={{ fontWeight: "700", fontSize: "20px" }}>₹{product.price}</div>
       <div className="extras-header">
         <h3 className="extras-title">Add Extras</h3>
-        <a href="#" className="view-all-link">View All</a>
+      
       </div>
       <div className="extra-item">
         <img src={product.image || extraImage} alt="Extra item" className="extra-image" />

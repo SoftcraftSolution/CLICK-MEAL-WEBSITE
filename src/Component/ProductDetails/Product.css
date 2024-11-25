@@ -1,126 +1,220 @@
 /* src/components/ProductPage/ProductPage.css */
 
 .product-page-container {
-    display: flex;
-    padding: 20px;
-  }
-  
-  .product-page-content {
-    flex: 2;
-    margin-right: 20px;
-  }
-  
-  .product-page-sidebar {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .product-gallery {
-    display: flex;
-    flex-direction: row;
-  }
-  
-  .gallery-thumbnails {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
-    align-items: flex-start;
-    flex-direction: column;
-    padding-top: 10px;
+  display: flex;
+  padding: 20px;
+  flex-wrap: wrap; /* Enable wrapping for responsive layout */
 }
-  
-  .thumbnail {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-    border-radius: 8px;
-    cursor: pointer;
-  }
-  
-  .main-image {
-    width: 90%;
-    height: 500px;
-    border-radius: 3px;
-    padding-left: 10px;
-  }
-  
-  .product-details {
-    padding: 20px 0;
-    font-family: 'Poppins', sans-serif;
-  }
-  
-  .product-name {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .product-price {
-    font-size: 20px;
-    color: green;
-    margin-bottom: 10px;
-  }
-  
-  .section-heading {
-    font-size: 18px;
-    font-weight: 500;
-    margin-top: 20px;
-  }
-  
-  .ingredients-list, .nutrition-list {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .product-extras {
-    background: #f9f9f9;
+
+.product-page-content {
+  flex: 2;
+  margin-right: 20px;
+}
+
+.product-page-sidebar {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.product-gallery {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
+}
+
+.gallery-thumbnails {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  align-items: flex-start;
+  flex-direction: column;
+  padding-top: 10px;
+}
+
+.thumbnail {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.main-image {
+  width: 90%;
+  height: 500px;
+  border-radius: 3px;
+  padding-left: 10px;
+}
+
+.product-details {
+  padding: 20px 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+.product-name {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.product-price {
+  font-size: 20px;
+  color: green;
+  margin-bottom: 10px;
+}
+
+.section-heading {
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: 20px;
+}
+
+.ingredients-list,
+.nutrition-list {
+  list-style: none;
+  padding: 0;
+}
+
+.product-extras {
+  background: #f9f9f9;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.extras-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.extra-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.extra-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+}
+
+.quantity-selector {
+  text-align: left;
+  font-family: 'Poppins', sans-serif;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.quantity-controls button {
+  background: #ddd;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.add-to-cart-button,
+.add-to-cart-small {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .product-page-container {
+    flex-direction: column; /* Stack content for smaller screens */
     padding: 10px;
-    border-radius: 8px;
   }
-  
-  .extras-title {
-    font-weight: bold;
-    margin-bottom: 10px;
+
+  .product-page-content {
+    margin-right: 0; /* Remove right margin for stacked layout */
+    margin-bottom: 20px; /* Add spacing between content and sidebar */
   }
-  
-  .extra-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+
+  .main-image {
+    width: 100%; /* Full width for the main image */
+    height: auto; /* Maintain aspect ratio */
   }
-  
-  .extra-image {
+
+  .gallery-thumbnails {
+    flex-direction: row; /* Horizontal thumbnails */
+    justify-content: center; /* Center thumbnails on smaller screens */
+    gap: 5px; /* Reduce gap between thumbnails */
+  }
+
+  .thumbnail {
     width: 50px;
     height: 50px;
-    border-radius: 5px;
   }
-  
-  .quantity-selector {
-    text-align: left;
-    font-family: 'Poppins', sans-serif;
+
+  .product-details {
+    padding: 10px 0;
   }
-  
+
+  .product-name {
+    font-size: 20px; /* Slightly smaller font for product name */
+  }
+
+  .product-price {
+    font-size: 18px;
+  }
+
+  .section-heading {
+    font-size: 16px;
+  }
+
+  .product-page-sidebar {
+    gap: 10px; /* Reduce spacing between sidebar elements */
+  }
+}
+
+@media (max-width: 480px) {
+  .product-page-container {
+    padding: 10px;
+  }
+
+  .product-page-content,
+  .product-page-sidebar {
+    width: 100%; /* Ensure full-width layout */
+  }
+
+  .main-image {
+    height: auto; /* Allow height to adjust for smaller screens */
+  }
+
+  .thumbnail {
+    width: 40px; /* Smaller thumbnails for compact layout */
+    height: 40px;
+  }
+
+  .product-name {
+    font-size: 18px; /* Further reduce font size for smaller screens */
+  }
+
+  .product-price {
+    font-size: 16px;
+  }
+
+  .add-to-cart-button,
+  .add-to-cart-small {
+    width: 100%; /* Full-width button for better usability */
+    padding: 12px; /* Larger padding for touch-friendly interaction */
+  }
+
   .quantity-controls {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    gap: 5px; /* Compact spacing for quantity controls */
   }
-  
-  .quantity-controls button {
-    background: #ddd;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
+
+  .product-extras {
+    padding: 8px; /* Compact padding for extras */
   }
-  
-  .add-to-cart-button, .add-to-cart-small {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-family: 'Poppins', sans-serif;
-  }
-  
+}
