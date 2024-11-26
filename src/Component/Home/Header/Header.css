@@ -43,7 +43,8 @@
   }
   
   .header-icon {
-    color: #000000; /* Icon color */
+    color: #000000;
+    padding-right: 3px; /* Icon color */
   }
   
   .header-cart-icon {
@@ -56,5 +57,25 @@
   
   .header-cart-icon i {
     cursor: pointer;
+  }
+  
+  .cart-icon-container {
+    position: relative;
+  }
+  
+  .cart-count-badge {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   

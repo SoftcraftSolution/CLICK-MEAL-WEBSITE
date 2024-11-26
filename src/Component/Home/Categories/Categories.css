@@ -84,7 +84,7 @@
   .categories-container {
     padding-left: 20px; /* Reduce left padding */
     gap: 15px;
-    justify-content: center; /* Center items on smaller screens */
+    /* Center items on smaller screens */
   }
 
   .category-card {

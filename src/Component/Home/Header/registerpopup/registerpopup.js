@@ -70,25 +70,26 @@ const RegisterPopup = ({ isOpen, onClose, onSwitchToLogin }) => {
         companyId: selectedCompanyId
       });
 
-      // Assuming the response contains a userId
-      const userId = response.data.userId;
+      // Extract userId and companyId from response
+      const userId = response.data.user?._id;
+      const companyId = response.data.user?.companyId;
 
-      // Store the userId in cookies (with an expiry time of 7 days, adjust as needed)
-      Cookies.set('userId', userId, { expires: 7 });
+      // Save userId and companyId in cookies
+      if (userId) Cookies.set('userId', userId, { expires: 7 });
+      if (companyId) Cookies.set('companyId', companyId, { expires: 7 });
 
       console.log('User registered successfully:', response.data.message);
 
-      // Show a toast message for successful registration
+      // Show success toast
       if (response.data && response.data.message) {
-        toast.success(response.data.message); // Show success toast with server response
-      } 
-      
+        toast.success(response.data.message);
+      }
 
       setShowLogin(true); // Trigger the LoginPopup display
       onClose(); // Close the RegisterPopup
     } catch (error) {
       console.error('Error registering user:', error.response?.data || error.message);
-      alert('Error registering user. Please try again.');
+      toast.error('Error registering user. Please try again.');
     }
   };
 
@@ -121,10 +122,10 @@ const RegisterPopup = ({ isOpen, onClose, onSwitchToLogin }) => {
                   placeholder="Phone Number"
                   value={formData.phoneNumber}
                   onChange={handleChange}
-                  maxLength="10" // Limit input to 10 characters
+                  maxLength="10"
                   required
                 />
-                {phoneError && <p className="error-message">{phoneError}</p>} {/* Display error message if phone number is invalid */}
+                {phoneError && <p className="error-message">{phoneError}</p>}
                 <input
                   type="email"
                   name="email"

@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import Cookies from 'js-cookie'; // Import js-cookie
-import './cartslider.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Cookies from "js-cookie";
+import "./cartslider.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 
-const CartSlider = ({ isOpen, onClose }) => {
+const CartSlider = ({ isOpen, onClose, onCartUpdate }) => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -17,20 +17,21 @@ const CartSlider = ({ isOpen, onClose }) => {
     const fetchCartItems = async () => {
       try {
         setLoading(true);
-        // Retrieve userId from cookies
-        const userId = Cookies.get('userId');
+        const userId = Cookies.get("userId");
         if (!userId) {
-          throw new Error('User ID not found in cookies');
+          throw new Error("User ID not found in cookies");
         }
-        const response = await axios.get(`https://clickmeal-backend.vercel.app/user/my-cart?userId=${userId}`);
+        const response = await axios.get(
+          `https://clickmeal-backend.vercel.app/user/my-cart?userId=${userId}`
+        );
         if (response.data && response.data.cartItems) {
           setItems(response.data.cartItems);
         } else {
           setItems([]);
         }
       } catch (error) {
-        console.error('Error fetching cart items:', error);
-        setError('Failed to load cart items. Please try again.');
+        console.error("Error fetching cart items:", error);
+        setError("Failed to load cart items. Please try again.");
       } finally {
         setLoading(false);
       }
@@ -44,18 +45,26 @@ const CartSlider = ({ isOpen, onClose }) => {
   const updateQuantity = (id, amount) => {
     setItems((prevItems) =>
       prevItems.map((item) =>
-        item._id === id ? { ...item, quantity: Math.max(1, item.quantity + amount) } : item
+        item._id === id
+          ? { ...item, quantity: Math.max(1, item.quantity + amount) }
+          : item
       )
     );
+    if (amount > 0) {
+      onCartUpdate(1); // Increment the cart count
+    }
   };
 
   const calculateTotal = () => {
-    return items.reduce((total, item) => total + item.itemId.price * item.quantity, 0);
+    return items.reduce(
+      (total, item) => total + item.itemId.price * item.quantity,
+      0
+    );
   };
 
   const handleCheckout = () => {
     onClose();
-    navigate('/pract');
+    navigate("/pract"); // Replace with your checkout route
   };
 
   if (!isOpen) return null;
@@ -70,7 +79,8 @@ const CartSlider = ({ isOpen, onClose }) => {
           </button>
         </div>
         <div className="cart-item-count">
-          <FontAwesomeIcon icon={faShoppingCart} /> You have {items.length} items in your Cart
+          <FontAwesomeIcon icon={faShoppingCart} /> You have {items.length}{" "}
+          items in your Cart
         </div>
 
         <div className="cart-items">
@@ -83,18 +93,28 @@ const CartSlider = ({ isOpen, onClose }) => {
               <div className="all-items-title">All Items</div>
               {items.map((item) => (
                 <div className="cart-item" key={item._id}>
-                  <img src={item.itemId.image} alt={item.itemId.itemName} />
+                  <img
+                    src={item.itemId.image}
+                    alt={item.itemId.itemName}
+                    className="cart-item-image"
+                  />
                   <div className="item-details">
                     <h4>{item.itemId.itemName}</h4>
                     <p>{item.itemId.description}</p>
                     <div className="item-controls">
                       <span className="item-price">₹{item.itemId.price}</span>
                       <div className="quantity-control">
-                        <button onClick={() => updateQuantity(item._id, -1)}>-</button>
+                        <button onClick={() => updateQuantity(item._id, -1)}>
+                          -
+                        </button>
                         <span>{item.quantity}</span>
-                        <button onClick={() => updateQuantity(item._id, 1)}>+</button>
+                        <button onClick={() => updateQuantity(item._id, 1)}>
+                          +
+                        </button>
                       </div>
-                      <span className="item-total">Total: ₹{item.itemId.price * item.quantity}</span>
+                      <span className="item-total">
+                        Total: ₹{item.itemId.price * item.quantity}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -109,7 +129,9 @@ const CartSlider = ({ isOpen, onClose }) => {
             <h3>₹{calculateTotal()}</h3>
             <p>incl all taxes</p>
           </div>
-          <button className="checkout-button" onClick={handleCheckout}>Checkout</button>
+          <button className="checkout-button" onClick={handleCheckout}>
+            Checkout
+          </button>
         </div>
       </div>
     </div>

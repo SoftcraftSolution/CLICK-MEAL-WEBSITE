@@ -68,8 +68,18 @@
   color: white;
 }
 
+.custom-toast-error {
+  background-color: #ff4d4d !important; /* Red background for error */
+  color: white !important; /* White text for better visibility */
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+  text-align: center;
+}
+
+
 /* Responsive styling for mobile screens */
 @media (max-width: 768px) {
+ 
   .toast-container {
     width: 100% !important; /* Ensure full width on smaller screens */
   }

@@ -15,6 +15,12 @@ function PaymentSummary({ orderTotal }) {
 
   const userId = Cookies.get("userId"); // Retrieve userId from cookies
 
+  // Recalculate total payment whenever `orderTotal` changes
+  useEffect(() => {
+    const calculatedTotal = orderTotal + deliveryCharges + gstAndServiceTax;
+    setTotalPayment(calculatedTotal);
+  }, [orderTotal]);
+
   // Fetch cart items on component mount
   useEffect(() => {
     if (userId) {
@@ -30,8 +36,6 @@ function PaymentSummary({ orderTotal }) {
 
       if (response.data.cartItems) {
         setCartItems(response.data.cartItems);
-        const calculatedTotal = response.data.totalPrice + deliveryCharges + gstAndServiceTax;
-        setTotalPayment(calculatedTotal);
       } else {
         setError("No items found in the cart.");
       }
@@ -66,8 +70,8 @@ function PaymentSummary({ orderTotal }) {
         orderData
       );
 
-console.log(response.data);
-      if (response.data.message=="Order created successfully") {
+      console.log(response.data);
+      if (response.data.message === "Order created successfully") {
         setSuccess("Order placed successfully!");
       } else {
         setError("Failed to place the order. Please try again.");

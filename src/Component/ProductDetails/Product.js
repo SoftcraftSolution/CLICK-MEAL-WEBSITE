@@ -27,7 +27,16 @@ const ProductPage = () => {
     try {
       const userId = Cookies.get('userId'); // Retrieve userId from cookies
       if (!userId) {
-        toast.error('User ID not found. Please log in.'); // Show error toast for login
+        // Display custom error toast with red background
+        toast.error('Register yourself first', {
+          position: 'top-center',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          className: 'custom-toast-error' // Apply custom class for styling
+        });
         return;
       }
 

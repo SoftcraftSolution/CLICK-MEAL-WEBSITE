@@ -122,6 +122,24 @@
   font-size: 15px;
   margin-left: 5px;
 }
+.delivery-time {
+  margin-top: 10px;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.delivery-date {
+  font-weight: bold;
+  color: #4CAF50; /* Green color for the date */
+  font-size: 14px;
+  margin-right: 5px;
+}
+
+.delivery-time-slot {
+  font-weight: normal;
+  color: #555; /* Neutral gray color for the time slot */
+  font-size: 14px;
+}
 
 /* Mobile responsiveness */
 @media (max-width: 768px) {

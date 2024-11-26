@@ -21,7 +21,16 @@ const MenuItem = ({ item }) => {
     try {
       const userId = Cookies.get('userId'); // Retrieve userId from cookies
       if (!userId) {
-        toast.error('User ID not found. Please log in.'); // Show error toast for login
+        // Show a custom error toast
+        toast.error('Register yourself first', {
+          position: 'top-center',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          className: 'custom-toast-error', // Apply custom class for styling
+        });
         return;
       }
 
