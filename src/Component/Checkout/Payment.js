@@ -3,7 +3,7 @@ import axios from "axios";
 import Cookies from "js-cookie"; // Import js-cookie to get userId from cookies
 import "./payment.css";
 
-function PaymentSummary({ orderTotal }) {
+function PaymentSummary({ orderTotal, selectedExtras = {} }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -46,32 +46,48 @@ function PaymentSummary({ orderTotal }) {
   };
 
   const handleOrderNow = async () => {
+    if (cartItems.length === 0) {
+      setError("No items in the cart to place an order.");
+      return;
+    }
+
     setLoading(true);
     setError(""); // Clear previous error
     setSuccess(""); // Clear previous success message
 
-    const itemsToOrder = cartItems.map((cartItem) => ({
+    // Safely handle `selectedExtras` in case it's undefined or null
+    const extras = Object.values(selectedExtras || {}).map((extra) => ({
+      extraMealId: extra._id,
+      quantity: extra.quantity,
+    }));
+     console.log(extras);
+    // Map cart items for the API payload
+    const items = cartItems.map((cartItem) => ({
       itemId: cartItem.itemId._id,
       quantity: cartItem.quantity,
-      extras: cartItem.itemId.extras || [], // Include extras if present
     }));
+
+    const deliveryDate = new Date().toISOString(); // Get current date in ISO format
 
     const orderData = {
       userId: userId,
-      items: itemsToOrder,
+      items: items, // Include all cart items
+      extras: extras, // Include all selected extras as a separate array
       paymentMethod: "card", // Hardcoded as card; update based on user selection
-      deliveryDate: new Date().toISOString(), // Delivery date set to current date
+      deliveryDate: deliveryDate, // Add delivery date to payload
     };
 
-    console.log(orderData);
+    // Log the request data for debugging
+    console.log("Order Data being sent:", orderData);
+
     try {
       const response = await axios.post(
         "https://clickmeal-backend.vercel.app/user/order-place",
         orderData
       );
 
-      console.log(response.data);
-      if (response.data.message === "Order created successfully") {
+      console.log("Order Response:", response.data); // Debugging: Log API response
+      if (response.data.message === "Order created successfully.") {
         setSuccess("Order placed successfully!");
       } else {
         setError("Failed to place the order. Please try again.");
@@ -93,7 +109,7 @@ function PaymentSummary({ orderTotal }) {
       <h3>Total Payment: ₹{totalPayment}</h3>
 
       {loading ? (
-        <p>Processing your order...</p> // Show loading message while placing the order
+        <p>Processing your order...</p>
       ) : (
         <button onClick={handleOrderNow}>Order Now</button>
       )}

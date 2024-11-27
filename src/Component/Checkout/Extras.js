@@ -1,9 +1,62 @@
-import React, { useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import axios from "axios";
 import "./Extras.css";
-import burger from '../../assets/salad.png'; // Sample image, replace with your asset as needed.
 
 function Extras() {
   const extraListRef = useRef(null);
+  const [extraItems, setExtraItems] = useState([]);
+  const [selectedExtras, setSelectedExtras] = useState({}); // Manage selected extras
+
+  // Fetch extras from the API
+  useEffect(() => {
+    const fetchExtras = async () => {
+      try {
+        const response = await axios.get(
+          "https://clickmeal-backend.vercel.app/user/get-extrameal"
+        );
+        if (response.data && response.data.data) {
+          setExtraItems(response.data.data); // Set the data from the API
+        }
+      } catch (error) {
+        console.error("Error fetching extras:", error);
+      }
+    };
+
+    fetchExtras();
+  }, []);
+
+  // Function to handle adding extras
+  const handleAddExtra = (extra) => {
+    setSelectedExtras((prevExtras) => ({
+      ...prevExtras,
+      [extra._id]: {
+        ...extra,
+        quantity: (prevExtras[extra._id]?.quantity || 0) + 1,
+      },
+    }));
+  };
+
+  const handleIncrementExtra = (id) => {
+    setSelectedExtras((prevExtras) => ({
+      ...prevExtras,
+      [id]: {
+        ...prevExtras[id],
+        quantity: prevExtras[id].quantity + 1,
+      },
+    }));
+  };
+
+  const handleDecrementExtra = (id) => {
+    setSelectedExtras((prevExtras) => {
+      const newExtras = { ...prevExtras };
+      if (newExtras[id].quantity === 1) {
+        delete newExtras[id];
+      } else {
+        newExtras[id].quantity -= 1;
+      }
+      return newExtras;
+    });
+  };
 
   // Function to handle touch and drag for scrolling
   const handleTouchMove = (e) => {
@@ -21,14 +74,6 @@ function Extras() {
     }
   };
 
-  // Sample data for multiple cards
-  const extraItems = [
-    { id: 1, title: "Cheese Burger", description: "Andhra curry, a staple from the southern Indian state..", price: "₹400", img: burger },
-    { id: 2, title: "Spicy Burger", description: "Delicious spicy flavors with fresh toppings..", price: "₹450", img: burger },
-    { id: 3, title: "Veggie Delight", description: "A blend of garden-fresh veggies..", price: "₹350", img: burger },
-    { id: 4, title: "BBQ Burger", description: "Savory BBQ sauce and juicy beef patty..", price: "₹500", img: burger },
-  ];
-
   return (
     <div className="extras">
       <h3>
@@ -41,18 +86,38 @@ function Extras() {
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
       >
-        {extraItems.map((item) => (
-          <div className="extra-item" key={item.id}>
-            <img src={item.img} alt={item.title} />
-            <div className="extra-info">
-              <div style={{ color: "#000000", fontWeight: "600" }}>{item.title}</div>
-              <p>{item.description}</p>
-              <button>Add to Cart</button>
+        {extraItems.length > 0 ? (
+          extraItems.map((item) => (
+            <div className="extra-item" key={item._id}>
+              <img src={item.image} alt={item.name} />
+              <div className="extra-info">
+                <div style={{ color: "#000000", fontWeight: "600" }}>{item.name}</div>
+                <p>{item.description}</p>
+                <button onClick={() => handleAddExtra(item)}>Add</button>
+              </div>
+              <span className="extra-price">₹{item.price}</span>
             </div>
-            <span className="extra-price">{item.price}</span>
-          </div>
-        ))}
+          ))
+        ) : (
+          <div className="no-extras">No extras available</div>
+        )}
       </div>
+
+      {/* Selected Extras Section */}
+      {Object.values(selectedExtras).length > 0 && (
+        <div className="selected-extras">
+          <h4>Selected Extras:</h4>
+          {Object.values(selectedExtras).map((extra) => (
+            <div key={extra._id} className="selected-extra-item">
+              <span>{extra.name} (x{extra.quantity})</span>
+              <div className="extra-controls">
+                <button onClick={() => handleIncrementExtra(extra._id)}>+</button>
+                <button onClick={() => handleDecrementExtra(extra._id)}>-</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
