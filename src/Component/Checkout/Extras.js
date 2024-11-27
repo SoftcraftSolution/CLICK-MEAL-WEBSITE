@@ -2,10 +2,9 @@ import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import "./Extras.css";
 
-function Extras({selectedExtras, setSelectedExtras}) {
+function Extras({ selectedExtras, setSelectedExtras }) {
   const extraListRef = useRef(null);
   const [extraItems, setExtraItems] = useState([]);
-  // const [selectedExtras, setSelectedExtras] = useState({}); // Manage selected extras
 
   // Fetch extras from the API
   useEffect(() => {
@@ -91,11 +90,19 @@ function Extras({selectedExtras, setSelectedExtras}) {
             <div className="extra-item" key={item._id}>
               <img src={item.image} alt={item.name} />
               <div className="extra-info">
-                <div style={{ color: "#000000", fontWeight: "600" }}>{item.name}</div>
-                <p>{item.description}</p>
+                <div style={{ color: "#000000", fontWeight: "600" }}>
+                  {typeof item.name === "string" ? item.name : "Unknown Item"}
+                </div>
+                <p>
+                  {typeof item.description === "string"
+                    ? item.description
+                    : "No description available"}
+                </p>
                 <button onClick={() => handleAddExtra(item)}>Add</button>
               </div>
-              <span className="extra-price">₹{item.price}</span>
+              <span className="extra-price">
+                ₹{typeof item.price === "number" ? item.price : "0"}
+              </span>
             </div>
           ))
         ) : (
@@ -103,13 +110,16 @@ function Extras({selectedExtras, setSelectedExtras}) {
         )}
       </div>
 
-      {/ Selected Extras Section /}
-      {Object.values(selectedExtras).length > 0 && (
+      {/* Selected Extras Section */}
+      {Object.values(selectedExtras || {}).length > 0 && (
         <div className="selected-extras">
           <h4>Selected Extras:</h4>
-          {Object.values(selectedExtras).map((extra) => (
+          {Object.values(selectedExtras || {}).map((extra) => (
             <div key={extra._id} className="selected-extra-item">
-              <span>{extra.name} (x{extra.quantity})</span>
+              <span>
+                {typeof extra.name === "string" ? extra.name : "Unknown Extra"} (x
+                {typeof extra.quantity === "number" ? extra.quantity : 0})
+              </span>
               <div className="extra-controls">
                 <button onClick={() => handleIncrementExtra(extra._id)}>+</button>
                 <button onClick={() => handleDecrementExtra(extra._id)}>-</button>

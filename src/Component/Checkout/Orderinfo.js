@@ -81,7 +81,7 @@ function OrderInfo({selectedExtras}) {
         <p>No items in the cart.</p>
       )}
 
-      {/ Payment Summary with total price passed as a prop /}
+    
       <PaymentSummary orderTotal={calculateTotalPrice()} selectedExtras={selectedExtras} />
     </div>
   );

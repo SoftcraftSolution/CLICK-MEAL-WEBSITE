@@ -14,7 +14,7 @@ function Checkout() {
       </header>
       <main className="checkout-main-content">
         <DeliveryPayment selectedExtras={selectedExtras} setSelectedExtras={setSelectedExtras} />
-        <OrderInfo selectedExtras={selectedExtras}/> {/ PaymentSummary will be inside OrderInfo /}
+        <OrderInfo selectedExtras={selectedExtras}/> 
       </main>
     </div>
   );
