@@ -57,10 +57,8 @@ const ProductGallery = ({ product }) => {
 
   return (
     <div className="product-gallery">
-      <div className="gallery-thumbnails">
-        <img src={product.image} alt={`${product.itemName} Thumbnail`} className="thumbnail" />
-      </div>
-      <img src={product.image} alt={product.itemName} className="main-image" />
+
+      <img style={{padding:"0px"}} src={product.image} alt={product.itemName} className="main-image" />
     </div>
   );
 };

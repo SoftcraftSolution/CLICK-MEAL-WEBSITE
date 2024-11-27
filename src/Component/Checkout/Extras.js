@@ -2,10 +2,10 @@ import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import "./Extras.css";
 
-function Extras() {
+function Extras({selectedExtras, setSelectedExtras}) {
   const extraListRef = useRef(null);
   const [extraItems, setExtraItems] = useState([]);
-  const [selectedExtras, setSelectedExtras] = useState({}); // Manage selected extras
+  // const [selectedExtras, setSelectedExtras] = useState({}); // Manage selected extras
 
   // Fetch extras from the API
   useEffect(() => {
@@ -103,7 +103,7 @@ function Extras() {
         )}
       </div>
 
-      {/* Selected Extras Section */}
+      {/ Selected Extras Section /}
       {Object.values(selectedExtras).length > 0 && (
         <div className="selected-extras">
           <h4>Selected Extras:</h4>

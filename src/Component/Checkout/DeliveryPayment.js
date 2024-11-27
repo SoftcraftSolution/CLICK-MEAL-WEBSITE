@@ -3,10 +3,10 @@ import { DateContext } from "../../Component/Checkout/Datecontext"; // Import co
 import "./Delivery.css";
 import Extras from "./Extras";
 
-function DeliveryPayment() {
+function DeliveryPayment({selectedExtras,setSelectedExtras}) {
   const { selectedDate } = useContext(DateContext); // Use context for the selected date
   const [deliveryDate, setDeliveryDate] = useState("");
-  const [selectedExtras, setSelectedExtras] = useState({}); // Manage selected extras
+  // const [selectedExtras, setSelectedExtras] = useState({}); // Manage selected extras
 
   useEffect(() => {
     const calculateDeliveryDate = () => {
@@ -54,6 +54,7 @@ function DeliveryPayment() {
         quantity: (prevExtras[extra._id]?.quantity || 0) + 1,
       },
     }));
+    console.log(selectedExtras)
   };
 
   const handleIncrementExtra = (id) => {
@@ -64,6 +65,7 @@ function DeliveryPayment() {
         quantity: prevExtras[id].quantity + 1,
       },
     }));
+    console.log(selectedExtras)
   };
 
   const handleDecrementExtra = (id) => {
@@ -77,13 +79,18 @@ function DeliveryPayment() {
       return newExtras;
     });
   };
-
+// console.
   return (
     <div className="delivery-payment">
       <h2>Delivery & Payment</h2>
 
-      {/* Selected Extras Section */}
-      {Object.values(selectedExtras).length > 0 && (
+      
+
+      {/ Extras Component /}
+      <Extras selectedExtras={selectedExtras} setSelectedExtras={setSelectedExtras} />
+
+      {/ Selected Extras Section /}
+      {/* {Object.values(selectedExtras).length > 0 && (
         <div className="selected-extras">
           <h4>Selected Extras:</h4>
           {Object.values(selectedExtras).map((extra) => (
@@ -96,12 +103,9 @@ function DeliveryPayment() {
             </div>
           ))}
         </div>
-      )}
+      )} */}
 
-      {/* Extras Component */}
-      <Extras onAddExtra={handleAddExtra} />
-
-      {/* Expected Delivery Section */}
+      {/ Expected Delivery Section /}
       <div className="delivery-time">
         <div style={{ color: "#333333", fontWeight: "bold" }}>Expected Delivery:</div>
         <div>

@@ -60,6 +60,7 @@ function PaymentSummary({ orderTotal, selectedExtras = {} }) {
       extraMealId: extra._id,
       quantity: extra.quantity,
     }));
+    console.log("============>");
      console.log(extras);
     // Map cart items for the API payload
     const items = cartItems.map((cartItem) => ({

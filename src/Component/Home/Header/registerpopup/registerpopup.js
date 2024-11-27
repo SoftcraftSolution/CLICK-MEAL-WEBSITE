@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './registerpopup.css';
-import sampleImage from '../../../../assets/registerimagetopost.PNG';
-import LoginPopup from '../loginpopup/loginup'; // Import the LoginPopup component
-import Cookies from 'js-cookie'; // Import js-cookie
-import { ToastContainer, toast } from 'react-toastify'; // Import Toast components from react-toastify
-import 'react-toastify/dist/ReactToastify.css'; // Import toast styles
+import sampleImage from '../../../../assets/registerimagetopost.PNG'; // Replace with your actual image path
+import LoginPopup from '../loginpopup/loginup'; // Import LoginPopup component
+import Cookies from 'js-cookie'; // To manage cookies
+import { ToastContainer, toast } from 'react-toastify'; // For toast notifications
+import 'react-toastify/dist/ReactToastify.css'; // Toast styles
 
 const RegisterPopup = ({ isOpen, onClose, onSwitchToLogin }) => {
   const [companies, setCompanies] = useState([]);
@@ -16,9 +16,10 @@ const RegisterPopup = ({ isOpen, onClose, onSwitchToLogin }) => {
     password: '',
     phoneNumber: ''
   });
-  const [showLogin, setShowLogin] = useState(false); // State to control LoginPopup visibility
-  const [phoneError, setPhoneError] = useState(''); // State to store phone validation error message
+  const [showLogin, setShowLogin] = useState(false); // Toggle between register and login popup
+  const [phoneError, setPhoneError] = useState(''); // Handle phone validation errors
 
+  // Fetch list of companies from the API
   useEffect(() => {
     const fetchCompanies = async () => {
       try {
@@ -27,17 +28,19 @@ const RegisterPopup = ({ isOpen, onClose, onSwitchToLogin }) => {
         setCompanies(companyList);
       } catch (error) {
         console.error('Error fetching companies:', error);
-        setCompanies([]); // Set an empty array on error to avoid mapping errors
+        setCompanies([]); // If error, set an empty array to avoid mapping issues
       }
     };
 
     fetchCompanies();
   }, []);
 
-  if (!isOpen) return null;
+  if (!isOpen) return null; // If the popup is not open, render nothing
 
+  // Handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
+
     // Validate phone number for exactly 10 digits
     if (name === 'phoneNumber' && value.length <= 10) {
       setFormData({ ...formData, [name]: value });
@@ -51,16 +54,19 @@ const RegisterPopup = ({ isOpen, onClose, onSwitchToLogin }) => {
     }
   };
 
+  // Handle company selection
   const handleCompanyChange = (e) => {
     setSelectedCompanyId(e.target.value);
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (phoneError) {
       alert('Please fix the phone number error before submitting.');
       return;
     }
+
     try {
       const response = await axios.post('https://clickmeal-backend.vercel.app/user/register', {
         fullName: formData.fullName,
@@ -70,23 +76,23 @@ const RegisterPopup = ({ isOpen, onClose, onSwitchToLogin }) => {
         companyId: selectedCompanyId
       });
 
-      // Extract userId and companyId from response
+      // Extract userId, companyId, and companyName from response
       const userId = response.data.user?._id;
       const companyId = response.data.user?.companyId;
+      const companyName = response.data.user?.companyName; // Assuming the API includes companyName
 
-      // Save userId and companyId in cookies
+      // Save userId, companyId, and companyName in cookies
       if (userId) Cookies.set('userId', userId, { expires: 7 });
       if (companyId) Cookies.set('companyId', companyId, { expires: 7 });
+      if (companyName) Cookies.set('companyName', companyName, { expires: 7 });
 
       console.log('User registered successfully:', response.data.message);
 
-      // Show success toast
-      if (response.data && response.data.message) {
-        toast.success(response.data.message);
-      }
+      // Show success notification
+      toast.success('User registered successfully!'); // Explicit success message
 
-      setShowLogin(true); // Trigger the LoginPopup display
-      onClose(); // Close the RegisterPopup
+      setShowLogin(true); // Show login popup
+      onClose(); // Close the register popup
     } catch (error) {
       console.error('Error registering user:', error.response?.data || error.message);
       toast.error('Error registering user. Please try again.');
@@ -97,7 +103,11 @@ const RegisterPopup = ({ isOpen, onClose, onSwitchToLogin }) => {
     <>
       <ToastContainer position="top-right" autoClose={5000} hideProgressBar={true} />
       {showLogin ? (
-        <LoginPopup isOpen={true} onClose={() => setShowLogin(false)} onSwitchToRegister={() => setShowLogin(false)} />
+        <LoginPopup
+          isOpen={true}
+          onClose={() => setShowLogin(false)}
+          onSwitchToRegister={() => setShowLogin(false)}
+        />
       ) : (
         <div className="register-popup-overlay" onClick={onClose}>
           <div className="register-popup-content" onClick={(e) => e.stopPropagation()}>
@@ -150,15 +160,32 @@ const RegisterPopup = ({ isOpen, onClose, onSwitchToLogin }) => {
                     </option>
                   ))}
                 </select>
-                <button style={{ backgroundColor: "#61AE5A", color: "#FFFFFF", fontWeight: "200" }} type="submit">
+                <button
+                  style={{
+                    backgroundColor: '#61AE5A',
+                    color: '#FFFFFF',
+                    fontWeight: '200'
+                  }}
+                  type="submit"
+                >
                   Continue
                 </button>
               </form>
-              <p style={{margin:"0px",paddingTop:"10px"}}>
+              <p style={{ margin: '0px', paddingTop: '10px' }}>
                 Already have an account?{' '}
-                <a href="#" onClick={(e) => { e.preventDefault(); onSwitchToLogin(); }}>Login</a>
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onSwitchToLogin();
+                  }}
+                >
+                  Login
+                </a>
               </p>
-              <button className="register-close-button" onClick={onClose}>X</button>
+              <button className="register-close-button" onClick={onClose}>
+                X
+              </button>
             </div>
           </div>
         </div>

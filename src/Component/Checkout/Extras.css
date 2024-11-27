@@ -222,22 +222,24 @@
 
   /* Adjust price font size */
   .extra-price {
-    font-size: 14px;
+    font-size: 17px;
     margin-left: 10px;
   }
 
   /* Adjust extra list layout */
   .extra-list {
-    flex-direction: column; /* Stack items vertically on mobile */
+    flex-direction: row; /* Stack items vertically on mobile */
   }
 
   /* Adjust extra item layout */
   .extra-item {
-    min-width: 100%; /* Ensure extra items take up full width */
-    flex-direction: column;
-    align-items: flex-start;
+    min-width: 150px; /* Reduce the width for smaller cards */
+    max-width: 200px; /* Optional: limit maximum width */
+    padding: 10px; /* Reduce padding */
+    flex-direction: column; /* Stack content vertically */
+    align-items: center; /* Center-align items */
     box-sizing: border-box;
-  }
+}
 
   /* Make delivery payment take full width on smaller screens */
   .delivery-payment {
@@ -272,7 +274,7 @@
 
   /* Further reduce price font size */
   .extra-price {
-    font-size: 12px;
+    font-size: 17px;
   }
 
   /* Make delivery payment take full width on very small screens */

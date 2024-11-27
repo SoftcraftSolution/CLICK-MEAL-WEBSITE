@@ -21,9 +21,16 @@ const ProfilePopup = ({ isOpen, onClose, onSignIn, onLogIn }) => {
   };
 
   const handleLogout = () => {
-    Cookies.remove("userId"); // Remove the userId cookie
-    navigate("/"); // Navigate to the home page
-    onClose(); // Close the profile popup
+    // Remove all relevant cookies
+    Cookies.remove("userId");
+    Cookies.remove("companyId");
+    Cookies.remove("companyName");
+
+    // Navigate to the home page
+    navigate("/");
+
+    // Close the profile popup
+    onClose();
   };
 
   return (
@@ -58,12 +65,10 @@ const ProfilePopup = ({ isOpen, onClose, onSignIn, onLogIn }) => {
             <img src={help} alt="Need Help" className="profile-icon" /> Need Help
           </p>
           <p>
-            <img src={terms} alt="Terms & Conditions" className="profile-icon" /> Terms &
-            Conditions
+            <img src={terms} alt="Terms & Conditions" className="profile-icon" /> Terms & Conditions
           </p>
           <p>
-            <img src={privacy} alt="Privacy Policy" className="profile-icon" /> Privacy
-            Policy
+            <img src={privacy} alt="Privacy Policy" className="profile-icon" /> Privacy Policy
           </p>
           {Cookies.get("userId") && (
             <p onClick={handleLogout}>

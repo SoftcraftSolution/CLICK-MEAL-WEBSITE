@@ -4,7 +4,7 @@ import Cookies from "js-cookie"; // Import js-cookie
 import "./Order.css";
 import PaymentSummary from "./Payment";
 
-function OrderInfo() {
+function OrderInfo({selectedExtras}) {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -81,8 +81,8 @@ function OrderInfo() {
         <p>No items in the cart.</p>
       )}
 
-      {/* Payment Summary with total price passed as a prop */}
-      <PaymentSummary orderTotal={calculateTotalPrice()} />
+      {/ Payment Summary with total price passed as a prop /}
+      <PaymentSummary orderTotal={calculateTotalPrice()} selectedExtras={selectedExtras} />
     </div>
   );
 }

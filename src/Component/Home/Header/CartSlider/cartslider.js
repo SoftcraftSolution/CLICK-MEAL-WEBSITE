@@ -6,7 +6,7 @@ import "./cartslider.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 
-const CartSlider = ({ isOpen, onClose, onCartUpdate }) => {
+const CartSlider = ({ isOpen, onClose, onCartUpdate = () => {} }) => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -43,15 +43,21 @@ const CartSlider = ({ isOpen, onClose, onCartUpdate }) => {
   }, [isOpen]);
 
   const updateQuantity = (id, amount) => {
-    setItems((prevItems) =>
-      prevItems.map((item) =>
-        item._id === id
-          ? { ...item, quantity: Math.max(1, item.quantity + amount) }
-          : item
-      )
-    );
+    setItems((prevItems) => {
+      const updatedItems = prevItems
+        .map((item) =>
+          item._id === id
+            ? { ...item, quantity: item.quantity + amount }
+            : item
+        )
+        .filter((item) => item.quantity > 0); // Remove items with quantity 0
+      return updatedItems;
+    });
+
     if (amount > 0) {
       onCartUpdate(1); // Increment the cart count
+    } else {
+      onCartUpdate(-1); // Decrement the cart count
     }
   };
 

@@ -70,7 +70,7 @@ const ProductPage = () => {
         <ProductDetails product={product} />
       </div>
       <div className="product-page-sidebar">
-        <ProductExtras product1={product} />
+        
         <QuantitySelector quantity={quantity} setQuantity={setQuantity} />
         <button className="add-to-cart-button" onClick={handleAddToCart}>
           Add to Cart

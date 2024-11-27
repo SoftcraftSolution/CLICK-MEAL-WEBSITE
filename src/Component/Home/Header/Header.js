@@ -124,7 +124,8 @@
 
 
 import React, { useContext, useEffect, useState } from "react";
-import { DateContext } from '../../Checkout/Datecontext';// Import context
+import Cookies from "js-cookie"; // Import js-cookie
+import { DateContext } from "../../Checkout/Datecontext"; // Import context
 import "./Header.css";
 import RegisterPopup from "./registerpopup/registerpopup";
 import LoginPopup from "./loginpopup/loginup";
@@ -137,26 +138,22 @@ import { faCalendarAlt, faBuilding, faUser, faShoppingCart } from "@fortawesome/
 
 const Header = () => {
   const { selectedDate, setSelectedDate } = useContext(DateContext); // Use context for date state
-  
   const [isRegisterPopupOpen, setIsRegisterPopupOpen] = useState(false);
   const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
   const [isCartSliderOpen, setIsCartSliderOpen] = useState(false);
   const [isProfilePopupOpen, setIsProfilePopupOpen] = useState(false);
-  const [companyName, setCompanyName] = useState("Default Company");
+  const [companyName, setCompanyName] = useState("No company"); // Default to "No company"
   const [cartCount, setCartCount] = useState(0);
 
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const nameParam = urlParams.get("name");
-    if (nameParam) {
-      const formattedName = nameParam
-        .toLowerCase()
-        .split(" ")
-        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(" ");
-      setCompanyName(formattedName);
+    // Get company name from cookies and update state
+    const storedCompanyName = Cookies.get("companyName");
+    if (storedCompanyName) {
+      setCompanyName(storedCompanyName);
+    } else {
+      setCompanyName("No company"); // Fallback if not found
     }
-  }, []);
+  }, [isRegisterPopupOpen, isLoginPopupOpen]); // Re-run effect when register/login state changes
 
   const handleDateChange = (e) => {
     setSelectedDate(e.target.value); // Update context state
@@ -166,17 +163,18 @@ const Header = () => {
     setIsCartSliderOpen(!isCartSliderOpen);
     setCartCount(0); // Reset count when cart is opened
   };
+
   const openRegisterPopup = () => {
-        setIsRegisterPopupOpen(true);
-        setIsLoginPopupOpen(false);
-        setIsProfilePopupOpen(false);
-      };
-    
-      const openLoginPopup = () => {
-        setIsLoginPopupOpen(true);
-        setIsRegisterPopupOpen(false);
-        setIsProfilePopupOpen(false);
-      };
+    setIsRegisterPopupOpen(true);
+    setIsLoginPopupOpen(false);
+    setIsProfilePopupOpen(false);
+  };
+
+  const openLoginPopup = () => {
+    setIsLoginPopupOpen(true);
+    setIsRegisterPopupOpen(false);
+    setIsProfilePopupOpen(false);
+  };
 
   return (
     <header className="header-container">
@@ -187,7 +185,7 @@ const Header = () => {
         <div className="header-date-picker">
           <FontAwesomeIcon icon={faCalendarAlt} className="header-icon" />
           <input
-          style={{border:"none",background:"#FFFFFF"}}
+            style={{ border: "none", background: "#FFFFFF" }}
             type="date"
             value={selectedDate}
             onChange={handleDateChange}
@@ -197,7 +195,7 @@ const Header = () => {
         </div>
         <button className="header-company-selector">
           <FontAwesomeIcon icon={faBuilding} className="header-icon" />
-          <span>{companyName}</span>
+          <span>{companyName}</span> {/* Display company name */}
         </button>
         <div className="header-cart-icon">
           <FontAwesomeIcon icon={faUser} onClick={() => setIsProfilePopupOpen(true)} />
@@ -210,8 +208,8 @@ const Header = () => {
 
       <ProfilePopup
         isOpen={isProfilePopupOpen}
-        onSignIn={openRegisterPopup} 
-        onLogIn={openLoginPopup} 
+        onSignIn={openRegisterPopup}
+        onLogIn={openLoginPopup}
         onClose={() => setIsProfilePopupOpen(false)}
       />
       <RegisterPopup
