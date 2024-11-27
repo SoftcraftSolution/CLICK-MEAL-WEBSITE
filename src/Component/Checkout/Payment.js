@@ -15,11 +15,16 @@ function PaymentSummary({ orderTotal, selectedExtras = {} }) {
 
   const userId = Cookies.get("userId"); // Retrieve userId from cookies
 
-  // Recalculate total payment whenever `orderTotal` changes
+  // Recalculate total payment whenever `orderTotal` or `selectedExtras` changes
   useEffect(() => {
-    const calculatedTotal = orderTotal + deliveryCharges + gstAndServiceTax;
+    const extrasCost = Object.values(selectedExtras).reduce(
+      (sum, extra) => sum + (extra.price || 0) * (extra.quantity || 1),
+      0
+    );
+
+    const calculatedTotal = orderTotal + deliveryCharges + gstAndServiceTax + extrasCost;
     setTotalPayment(calculatedTotal);
-  }, [orderTotal]);
+  }, [orderTotal, selectedExtras]);
 
   // Fetch cart items on component mount
   useEffect(() => {
@@ -60,8 +65,7 @@ function PaymentSummary({ orderTotal, selectedExtras = {} }) {
       extraMealId: extra._id,
       quantity: extra.quantity,
     }));
-    console.log("============>");
-     console.log(extras);
+
     // Map cart items for the API payload
     const items = cartItems.map((cartItem) => ({
       itemId: cartItem.itemId._id,
@@ -107,6 +111,15 @@ function PaymentSummary({ orderTotal, selectedExtras = {} }) {
       <p>Order Total: ₹{orderTotal}</p>
       <p>Delivery Charges: ₹{deliveryCharges}</p>
       <p>GST and Service Tax: ₹{gstAndServiceTax}</p>
+      {Object.keys(selectedExtras).length > 0 && (
+        <p>
+          Extras Cost: ₹
+          {Object.values(selectedExtras).reduce(
+            (sum, extra) => sum + (extra.price || 0) * (extra.quantity || 1),
+            0
+          )}
+        </p>
+      )}
       <h3>Total Payment: ₹{totalPayment}</h3>
 
       {loading ? (

@@ -29,7 +29,7 @@ function MyOrders({ onOrderClick }) {
         ["ordered", "preparing", "out-for-delivery"].includes(order.status)
       );
       const previous = fetchedOrders.filter((order) =>
-        ["completed", "canceled"].includes(order.status)
+        ["completed", "canceled", "delivered"].includes(order.status)
       );
 
       setOrders(activeTab === "Ongoing" ? ongoing : previous);
@@ -90,13 +90,35 @@ function MyOrders({ onOrderClick }) {
             <img src={placeholderImage} alt="Order" className="order-image" />
             <div className="order-details">
               <div style={{ fontWeight: "700" }}>Order #{order.orderId}</div>
-              <div>Total Items: {order.items.length}</div>
-              <div>Payment Status: {order.paymentStatus}</div>
-              <div className="order-flex">
-                <div>Delivery: {formatDate(order.deliveryDate)}</div>
-                <div className="order-total">Total: ₹{order.totalPrice}</div>
-              </div>
               <div>Status: {order.status}</div>
+              <div>Total Price: ₹{order.totalPrice}</div>
+              <div>Payment Method: {order.paymentMethod}</div>
+              <div>Payment Status: {order.paymentStatus}</div>
+              <div>Delivery Date: {formatDate(order.deliveryDate)}</div>
+              <div>
+                <strong>Items:</strong>
+                <ul>
+                  {order.items.map((item) => (
+                    <li key={item.itemId}>
+                      <span>Item Name: {item.name}</span>
+                      <span> - Quantity: {item.quantity}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              {order.extras && order.extras.length > 0 && (
+                <div>
+                  <strong>Extras:</strong>
+                  <ul>
+                    {order.extras.map((extra) => (
+                      <li key={extra.extraMealId}>
+                        <span>Extra Name: {extra.name}</span>
+                        <span> - Quantity: {extra.quantity}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
         ))}
